@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Día 2 · Workspace Agents & Claude Cowork</title>
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0b1020;
+    color:#f5f7fb;
+}
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:60px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#0b1020 0%,#1a2448 50%,#3f4fd3 100%);
+}
+h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+.subtitle{
+    max-width:900px;
+    opacity:.9;
+    line-height:1.6;
+    margin-bottom:50px;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+    width:100%;
+    max-width:1100px;
+}
+.card{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:24px;
+    padding:35px;
+    backdrop-filter:blur(10px);
+    text-align:left;
+}
+.card h2{
+    margin-top:0;
+}
+.card p{
+    line-height:1.6;
+    opacity:.92;
+}
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:14px 22px;
+    border-radius:12px;
+    background:#ffffff;
+    color:#111827;
+    text-decoration:none;
+    font-weight:bold;
+}
+.footer{
+    margin-top:60px;
+    opacity:.7;
+    font-size:.9rem;
+}
+</style>
+</head>
+<body>
+<section class="hero">
+    <h1>Día 2</h1>
+    <p class="subtitle">
+        Automatización de workflows, agentes corporativos y trabajo operativo asistido con IA.
+        Este bloque combina Workspace Agents de OpenAI y Claude Cowork aplicados a casos reales de NATEEVO.
+    </p>
+
+    <div class="cards">
+        <div class="card">
+            <h2>Workspace Agents</h2>
+            <p>
+                Diseño de agentes, skills, conectores, schedules, Slack, QA de propuestas,
+                Meeting Intelligence Agents, gobierno operativo y automatización segura.
+            </p>
+            <a class="button" href="./workspace-agents/">Entrar</a>
+        </div>
+
+        <div class="card">
+            <h2>Claude Cowork</h2>
+            <p>
+                Trabajo contextual sobre proyectos, memoria, carpetas, plugins,
+                tareas programadas y colaboración operativa avanzada con Claude.
+            </p>
+            <a class="button" href="./claude-cowork/">Entrar</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        IA Aplicada en NATEEVO · Día 2
+    </div>
+</section>
+</body>
+</html>
