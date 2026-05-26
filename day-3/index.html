@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microsoft 365 Copilot · Laboratorio ejecutivo · NATEEVO · Día 3</title>
+<style>
+:root{
+  --bg:#080b21;--panel:#101633;--panel-2:#0c1029;--text:#f5f7ff;--muted:#aeb8dc;--dim:#8c95c0;
+  --line:rgba(255,255,255,.14);--line-strong:rgba(255,255,255,.24);
+  --cyan:#29d9ff;--blue:#346dff;--mag:#fb3fb1;--coral:#ff6b4a;--orange:#ff9d2e;--green:#5ee6a8;--yellow:#ffd84d;--red:#ff477e;
+  --shadow:0 18px 60px rgba(0,0,0,.35);--radius:24px;--radius-sm:14px;--max:1220px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 12% 10%,rgba(255,107,74,.28),transparent 30%),radial-gradient(circle at 82% 0%,rgba(41,217,255,.24),transparent 32%),radial-gradient(circle at 68% 80%,rgba(251,63,177,.14),transparent 36%),linear-gradient(135deg,#060818,#0b102c 48%,#090b20);background-attachment:fixed;color:var(--text);line-height:1.55;min-height:100vh}
+a{color:inherit}.wrap{max-width:var(--max);margin:0 auto;padding:30px clamp(16px,4vw,46px) 90px}.hidden{display:none!important}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:26px;position:sticky;top:0;z-index:20;padding:12px 0;background:linear-gradient(180deg,rgba(8,11,33,.96),rgba(8,11,33,.68) 70%,transparent);backdrop-filter:blur(16px)}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,var(--orange),var(--mag),var(--cyan));box-shadow:0 0 30px rgba(251,63,177,.45)}.brand h1{font-size:16px;margin:0;letter-spacing:.3px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.toplinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.08);color:white;padding:11px 14px;text-decoration:none;cursor:pointer;font:inherit;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:all .18s ease;white-space:nowrap}.btn:hover{background:rgba(255,255,255,.14);border-color:var(--line-strong)}.btn.primary{border:none;background:linear-gradient(135deg,var(--coral),var(--mag),var(--blue));box-shadow:0 12px 35px rgba(251,63,177,.22)}.btn.primary:hover{box-shadow:0 14px 40px rgba(251,63,177,.35);transform:translateY(-1px)}.btn.ghost{background:transparent}.btn.compact{padding:7px 10px;font-size:12px}.btn.danger{background:rgba(255,71,126,.14);border-color:rgba(255,71,126,.35)}
+.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:34px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));box-shadow:var(--shadow);padding:clamp(26px,5vw,54px);min-height:520px;display:grid;grid-template-columns:1.1fr .78fr;gap:32px;align-items:center}.hero:before{content:"";position:absolute;inset:-1px;pointer-events:none;background:radial-gradient(circle at 30% 12%,rgba(255,157,46,.22),transparent 34%),radial-gradient(circle at 86% 50%,rgba(41,217,255,.16),transparent 42%)}.hero>*{position:relative;z-index:1}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#d9e0ff;font-size:13px}.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px var(--green)}h2.hero-title{font-size:clamp(40px,5.8vw,70px);line-height:.98;margin:24px 0 16px;letter-spacing:-2.2px;font-weight:730}.hero p.lead{color:var(--muted);font-size:18px;max-width:720px;margin:0}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.cover{border-radius:28px;overflow:hidden;border:1px solid var(--line);box-shadow:0 22px 80px rgba(0,0,0,.35);background:#0b1028;min-height:470px}.cover img{width:100%;height:100%;min-height:470px;object-fit:cover;display:block}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.badge{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:#e9edff;background:rgba(255,255,255,.06)}.badge.fact{background:rgba(94,230,168,.12);border-color:rgba(94,230,168,.45)}.badge.verify{background:rgba(255,157,46,.14);border-color:rgba(255,157,46,.5)}.badge.risk{background:rgba(251,63,177,.15);border-color:rgba(251,63,177,.5)}.badge.cyan{background:rgba(41,217,255,.12);border-color:rgba(41,217,255,.4)}
+.section{margin:28px 0;border:1px solid var(--line);border-radius:var(--radius);background:rgba(12,17,45,.72);box-shadow:var(--shadow);overflow:hidden;scroll-margin-top:98px}.section-head{padding:24px 28px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.025))}.section-head h3{font-size:28px;letter-spacing:-.6px;margin:0;font-weight:720}.section-head .lead{color:var(--muted);max-width:930px;margin:10px 0 0}.section-head .kicker{font-size:12px;color:var(--cyan);font-weight:750;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.content{padding:26px 28px}.content p{margin:0 0 16px;color:#dde2f7}.content p:last-child{margin-bottom:0}.content h4{font-size:20px;letter-spacing:-.3px;margin:24px 0 12px}.content ul,.content ol{margin:0 0 18px;padding-left:24px}.content li{margin-bottom:8px;color:#dde2f7}.content li::marker{color:var(--mag)}
+.grid{display:grid;gap:16px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.card{border:1px solid var(--line);border-radius:18px;padding:18px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));transition:all .2s ease}.card h4,.card h5{margin:0 0 8px}.card p{color:var(--muted);font-size:14px;margin:0}.card:hover{border-color:var(--line-strong);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035))}.select-card{cursor:pointer;text-align:left;color:inherit;font:inherit}.select-card.selected{border-color:transparent;background:linear-gradient(145deg,rgba(94,230,168,.16),rgba(41,217,255,.08));box-shadow:0 0 0 1.5px var(--green),0 14px 40px rgba(94,230,168,.18)}.select-card .code{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--cyan);letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}.select-card.selected .code{color:var(--green)}
+.table-wrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:18px;background:rgba(8,12,30,.5)}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:13px 16px;vertical-align:top;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}th:last-child,td:last-child{border-right:none}tbody tr:last-child td{border-bottom:none}th{background:rgba(255,255,255,.055);font-weight:650;color:#fff;font-size:13px}td{color:#dde2f7}td strong{color:#fff}
+.callout{margin:20px 0;padding:18px 22px;border-radius:18px;border:1px solid rgba(255,216,77,.4);background:linear-gradient(145deg,rgba(255,216,77,.10),rgba(255,157,46,.06))}.callout.warn{border-color:rgba(251,63,177,.4);background:linear-gradient(145deg,rgba(251,63,177,.12),rgba(255,107,74,.06))}.callout.info{border-color:rgba(41,217,255,.4);background:linear-gradient(145deg,rgba(41,217,255,.10),rgba(52,109,255,.06))}.callout.ok{border-color:rgba(94,230,168,.4);background:linear-gradient(145deg,rgba(94,230,168,.12),rgba(41,217,255,.05))}.callout-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:650;margin-bottom:10px;color:#fff}.callout-title:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 12px var(--yellow)}.callout.warn .callout-title:before{background:var(--mag);box-shadow:0 0 12px var(--mag)}.callout.info .callout-title:before{background:var(--cyan);box-shadow:0 0 12px var(--cyan)}.callout.ok .callout-title:before{background:var(--green);box-shadow:0 0 12px var(--green)}
+.code-block{position:relative;margin:16px 0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(145deg,rgba(8,12,30,.95),rgba(16,22,51,.85))}.code-block-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.035);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}pre{margin:0;padding:18px 20px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;line-height:1.6;color:#dde2f7;white-space:pre-wrap;word-break:break-word}.copy-btn{background:transparent;border:1px solid var(--line);color:var(--muted);padding:4px 10px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:11px;text-transform:none;letter-spacing:0}.copy-btn:hover{color:white;border-color:var(--cyan)}.copy-btn.copied{color:var(--green);border-color:var(--green)}code{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:.88em;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:6px;border:1px solid var(--line);color:#e9edff}
+.builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.builder-form{display:flex;flex-direction:column;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:13px;color:#fff;font-weight:650;display:flex;align-items:center;gap:8px}.field label .hint{font-weight:400;color:var(--muted);font-size:12px}.field input,.field textarea,.field select{background:rgba(8,12,30,.62);border:1px solid var(--line);color:white;padding:11px 14px;border-radius:11px;font:inherit;font-size:14px;width:100%;transition:all .18s}.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(41,217,255,.15)}.field textarea{resize:vertical;min-height:84px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.55}.preview{position:sticky;top:92px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(145deg,rgba(8,12,30,.95),rgba(16,22,51,.85));box-shadow:0 18px 60px rgba(0,0,0,.4)}.preview-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--line)}.preview-head span{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}.preview-head .live{display:flex;align-items:center;gap:6px;color:var(--green)}.preview-head .live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.8s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}.preview-body{padding:18px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.65;color:#dde2f7;max-height:560px;overflow-y:auto;white-space:pre-wrap;word-break:break-word}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);padding:8px 11px;border-radius:999px;cursor:pointer;font:inherit;font-size:12px}.tab.active{color:white;background:linear-gradient(135deg,rgba(255,107,74,.32),rgba(41,217,255,.18));border-color:rgba(255,255,255,.3)}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);cursor:pointer;font-size:13px;color:#dde2f7;transition:.18s;user-select:none}.check:hover{background:rgba(255,255,255,.08)}.check input{margin-top:3px;accent-color:#5ee6a8}.check:has(input:checked){border-color:rgba(94,230,168,.48);background:rgba(94,230,168,.08)}
+.linter-list{display:flex;flex-direction:column;gap:8px;margin-top:14px}.lint{display:flex;gap:10px;padding:10px 12px;border-radius:12px;font-size:13px;border:1px solid rgba(255,216,77,.36);background:rgba(255,216,77,.08);color:#fff3bf}.lint.ok{border-color:rgba(94,230,168,.35);background:rgba(94,230,168,.08);color:#c9f7e0}.lint.bad{border-color:rgba(251,63,177,.38);background:rgba(251,63,177,.09);color:#ffd4ea}.lint .s{font-weight:800;min-width:20px}.scorebox{border:1px solid var(--line);border-radius:18px;padding:18px;background:rgba(255,255,255,.04);display:grid;gap:12px}.scorebar{height:13px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.scorebar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:width .25s}.scoretext{font-weight:700;font-size:18px}.recommendation{color:var(--muted);font-size:14px}.progress{height:11px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--mag),var(--cyan),var(--green));transition:width .25s}.small{font-size:12px;color:var(--muted)}
+.test-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.test-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);padding:14px}.test-card h5{margin:0 0 6px;font-size:15px}.test-card p{font-size:13px;color:var(--muted);margin:0 0 12px}.test-buttons{display:flex;gap:6px;flex-wrap:wrap}.test-btn{border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--muted);border-radius:999px;padding:6px 9px;cursor:pointer;font:inherit;font-size:12px}.test-btn.active.ok{color:#0a1430;background:var(--green);border-color:var(--green)}.test-btn.active.fail{color:white;background:var(--red);border-color:var(--red)}.test-btn.active.na{color:#0a1430;background:var(--yellow);border-color:var(--yellow)}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.chip{border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.06);color:var(--muted);padding:8px 11px;cursor:pointer;font:inherit;font-size:13px}.chip.active{color:white;background:linear-gradient(135deg,rgba(255,107,74,.35),rgba(41,217,255,.22));border-color:rgba(255,255,255,.28)}.search{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(8,12,30,.66);color:var(--text);outline:none;margin:0 0 14px;font:inherit}.kit-tree{border:1px solid var(--line);border-radius:18px;padding:18px 20px;background:linear-gradient(145deg,rgba(8,12,30,.85),rgba(16,22,51,.6));font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;line-height:1.8;color:#dde2f7;margin:18px 0}.kit-tree .folder{color:var(--cyan)}.kit-tree .file{color:#dde2f7}.kit-tree .generated{color:var(--green)}.footer{color:var(--muted);font-size:13px;margin:30px 4px 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.tool-card{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.04)}.tool-card .tool-name{display:flex;align-items:center;gap:8px;font-weight:650;color:#fff;font-size:15px;margin-bottom:6px}.tool-card .tool-name:before{content:"";width:10px;height:10px;border-radius:3px;background:var(--cyan)}.tool-card.word .tool-name:before{background:#2b7cd3}.tool-card.excel .tool-name:before{background:#21a366}.tool-card.ppt .tool-name:before{background:#d24726}.tool-card.outlook .tool-name:before{background:#0078d4}.tool-card.teams .tool-name:before{background:#6264a7}.tool-card.researcher .tool-name:before{background:var(--mag)}.tool-card.analyst .tool-name:before{background:var(--orange)}.tool-card.copilot .tool-name:before{background:linear-gradient(135deg,var(--coral),var(--mag),var(--cyan))}.tool-card .tool-meta{font-size:12px;color:var(--muted);margin-top:6px}
+.lab-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:14px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.035)}.lab-toolbar .role-active{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}.lab-toolbar .role-active strong{color:#fff}
+@media(max-width:980px){.topbar{position:relative;align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr}.cover{min-height:auto}.cover img{min-height:420px;max-height:560px}.grid.two,.grid.three,.grid.four{grid-template-columns:1fr}.builder-grid{grid-template-columns:1fr}.preview{position:static}.check-grid{grid-template-columns:1fr}.test-grid{grid-template-columns:1fr}}
+@media(max-width:560px){h2.hero-title{letter-spacing:-1.4px}.section-head,.content{padding-left:20px;padding-right:20px}.toplinks .btn{font-size:12px;padding:8px 10px}}
+@media print{.topbar,.hero-actions,.copy-btn,.filterbar,.btn,.test-buttons{display:none!important}body{background:white;color:black}.section,.hero,.card,.preview,.code-block{box-shadow:none;border-color:#ddd;background:white;color:black}td,.content p,.content li,.section-head .lead,.small{color:#333}pre{color:#111;background:white}.cover{display:none}}
+::selection{background:var(--mag);color:white}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="topbar">
+  <div class="brand"><div class="logo" aria-hidden="true"></div><div><h1>Microsoft 365 Copilot · Laboratorio ejecutivo</h1><p>NATEEVO · Día 3 · Producción ejecutiva con Copilot, Researcher y Analyst</p></div></div>
+  <nav class="toplinks" aria-label="Navegación rápida">
+    <a class="btn" href="#rol">Rol</a><a class="btn" href="#diagnostico">Diagnóstico</a><a class="btn" href="#lab-word">Word</a><a class="btn" href="#lab-excel">Excel · Analyst</a><a class="btn" href="#lab-ppt">PowerPoint</a><a class="btn" href="#lab-researcher">Researcher</a><a class="btn" href="#builder">Builder</a><a class="btn primary" href="#kit">Pack</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div>
+    <span class="eyebrow"><span class="dot"></span> Día 3 · 3 horas · Paquete ejecutivo completo</span>
+    <h2 class="hero-title">Convierte información dispersa en un paquete ejecutivo con Microsoft 365 Copilot.</h2>
+    <p class="lead">Memo, análisis, presentación, follow-up y checklist en un flujo controlado. Elige tu rol, ejecuta los laboratorios de Word, Excel + Analyst, PowerPoint y Researcher, y construye un prompt maestro reutilizable para tus próximos proyectos.</p>
+    <div class="badges"><span class="badge fact">Word</span><span class="badge fact">Excel + Analyst</span><span class="badge fact">PowerPoint</span><span class="badge cyan">Researcher</span><span class="badge cyan">Outlook · Teams</span><span class="badge verify">Cowork</span><span class="badge risk">Red team</span></div>
+    <div class="hero-actions"><a class="btn primary" href="#rol">Elegir rol y empezar</a><a class="btn ghost" href="#diagnostico">Diagnóstico de herramienta</a><a class="btn ghost" href="#kit">Descargar pack</a></div>
+  </div>
+  <div class="cover"><img src="data:image/webp;base64,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" alt="Imagen abstracta de productividad y trabajo ejecutivo con IA"></div>
+</section>
+
+<section class="section" id="uso">
+  <div class="section-head"><div class="kicker">Cómo usar este laboratorio</div><h3>La secuencia: rol, diagnóstico, laboratorios, integración y validación</h3><p class="lead">El laboratorio convierte el manual del Día 3 en un flujo operativo. La regla de oro es la misma: Copilot acelera la producción; el criterio profesional valida la decisión.</p></div>
+  <div class="content">
+    <div class="grid four">
+      <div class="card"><h4>1. Rol y caso</h4><p>Selecciona tu rol NATEEVO. Los prompts y datasets se adaptan al perfil.</p></div>
+      <div class="card"><h4>2. Diagnóstico</h4><p>Decide qué Copilot o agente usar antes de abrir el primer documento.</p></div>
+      <div class="card"><h4>3. Laboratorios</h4><p>Word, Excel + Analyst, PowerPoint y Researcher con prompts ya redactados.</p></div>
+      <div class="card"><h4>4. Pack ejecutivo</h4><p>Integra todo en un paquete revisable y descarga el material reutilizable.</p></div>
+    </div>
+    <div class="callout info"><div class="callout-title">Regla de oro</div><p>La IA produce borradores; tú validas. Distingue siempre <code>[HECHO]</code>, <code>[HIPOTESIS]</code>, <code>[RECOMENDACION]</code>, <code>[PENDIENTE]</code>, <code>[NO LOCALIZADO]</code> y <code>[VERIFICAR]</code>. Si dudas sobre si un dato puede compartirse, anonimízalo.</p></div>
+    <div class="callout warn"><div class="callout-title">Seguridad y privacidad</div><p>Microsoft 365 Copilot opera dentro del límite del servicio Microsoft 365. Los prompts, las respuestas y los datos accedidos vía Microsoft Graph no se usan para entrenar modelos fundacionales. Aun así, cumple las políticas internas de NATEEVO y del cliente: no pegues datos personales, credenciales, contratos ni información de cliente si el entorno no está aprobado para ello.</p></div>
+  </div>
+</section>
+
+<section class="section" id="rol">
+  <div class="section-head"><div class="kicker">Paso 1 · Personalización</div><h3>Elige tu rol NATEEVO</h3><p class="lead">Los prompts de Word, Excel + Analyst, PowerPoint y Researcher se adaptan al perfil seleccionado. Cambia de rol en cualquier momento; el resto del laboratorio se actualiza automáticamente.</p></div>
+  <div class="content">
+    <div class="grid three" id="roleGrid"></div>
+    <div class="callout ok" id="roleConfirm"><div class="callout-title">Rol activo</div><p id="roleConfirmText">Selecciona un rol para adaptar los prompts y los datasets recomendados.</p></div>
+  </div>
+</section>
+
+<section class="section" id="diagnostico">
+  <div class="section-head"><div class="kicker">Paso 2 · Diagnóstico</div><h3>¿Qué herramienta de Copilot necesitas para esta tarea?</h3><p class="lead">Antes de abrir Word o PowerPoint, decide qué motor encaja mejor. Marca lo que aplica a tu caso y el laboratorio recomienda la combinación.</p></div>
+  <div class="content">
+    <div class="builder-grid">
+      <div class="check-grid" id="diagChecks">
+        <label class="check"><input type="checkbox" data-tag="word" checked>Necesito redactar un documento ejecutivo (memo, propuesta, informe).</label>
+        <label class="check"><input type="checkbox" data-tag="excel">Tengo una tabla o dataset y necesito leer el negocio que hay detrás.</label>
+        <label class="check"><input type="checkbox" data-tag="analyst">Quiero explorar hipótesis, calcular métricas y validar fórmulas.</label>
+        <label class="check"><input type="checkbox" data-tag="ppt">Necesito presentar la recomendación a un comité o cliente.</label>
+        <label class="check"><input type="checkbox" data-tag="researcher">Me falta contexto externo: benchmarks, tendencias, fuentes recientes.</label>
+        <label class="check"><input type="checkbox" data-tag="outlook">Tengo hilos de email o conversaciones que resumir y convertir en acciones.</label>
+        <label class="check"><input type="checkbox" data-tag="teams">Necesito sintetizar reuniones, acuerdos y pendientes.</label>
+        <label class="check"><input type="checkbox" data-tag="cowork">Trabajo con muchos archivos sueltos que necesito clasificar y reutilizar.</label>
+      </div>
+      <div class="scorebox">
+        <div class="scoretext" id="diagSummary">Selecciona qué aplica a tu caso.</div>
+        <div id="diagTools" class="grid" style="gap:8px"></div>
+        <div class="small" id="diagRecommendation">Marca las casillas y obtendrás una recomendación de qué Copilot abrir, en qué orden, y qué validar al final.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flujo">
+  <div class="section-head"><div class="kicker">Paso 3 · Flujo NATEEVO</div><h3>De información dispersa a paquete ejecutivo</h3><p class="lead">Cada paso del flujo produce una salida que alimenta al siguiente. Si rompes la cadena, pierdes trazabilidad.</p></div>
+  <div class="content">
+    <div class="table-wrap"><table>
+    <thead><tr><th>Paso</th><th>Entrada</th><th>Herramienta</th><th>Salida</th></tr></thead>
+    <tbody>
+    <tr><td><strong>1. Ordenar contexto</strong></td><td>Notas, actas, emails, briefings, documentos.</td><td>Copilot Chat / Word</td><td>Mapa de hechos, hipótesis y pendientes.</td></tr>
+    <tr><td><strong>2. Redactar memo</strong></td><td>Contexto ordenado.</td><td>Word Copilot</td><td>Memo ejecutivo de 1-2 páginas.</td></tr>
+    <tr><td><strong>3. Analizar datos</strong></td><td>Tabla o dataset.</td><td>Excel Copilot / Analyst</td><td>Tendencias, outliers, métricas y riesgos.</td></tr>
+    <tr><td><strong>4. Investigar contexto</strong></td><td>Tema profesional y objetivo.</td><td>Researcher</td><td>Informe breve con fuentes y nivel de confianza.</td></tr>
+    <tr><td><strong>5. Construir narrativa</strong></td><td>Memo + análisis + investigación.</td><td>PowerPoint Copilot</td><td>Deck ejecutivo de 6-8 diapositivas.</td></tr>
+    <tr><td><strong>6. Validar</strong></td><td>Todos los entregables.</td><td>IA como revisor + criterio humano</td><td>Checklist y versión lista para revisión interna.</td></tr>
+    <tr><td><strong>7. Follow-up</strong></td><td>Decisión, acuerdos y próximos pasos.</td><td>Outlook / Word</td><td>Email posterior no enviado.</td></tr>
+    </tbody></table></div>
+    <div class="callout info"><div class="callout-title">Etiquetas obligatorias en toda salida</div><p><code>[HECHO]</code> dato confirmado · <code>[HIPOTESIS]</code> interpretación plausible · <code>[RECOMENDACION]</code> acción sugerida · <code>[PENDIENTE]</code> información que falta · <code>[NO LOCALIZADO]</code> dato no encontrado · <code>[VERIFICAR]</code> requiere revisión antes de enviar.</p></div>
+  </div>
+</section>
+<section class="section" id="lab-word">
+  <div class="section-head"><div class="kicker">Laboratorio 1 · Word + Copilot Chat</div><h3>Memo ejecutivo: de materiales dispersos a documento de 1-2 páginas</h3><p class="lead">Objetivo: crear un memo que pueda usarse como briefing previo, resumen de diagnóstico o base de propuesta. Trabajo por iteraciones: ordenar, redactar, adaptar por audiencia, red team.</p></div>
+  <div class="content">
+    <div class="lab-toolbar"><div class="role-active">Rol activo: <strong id="labWordRole">—</strong></div><div class="small">Tiempo estimado: 30 min · Salida: memo de 2 páginas + 3 versiones por audiencia</div></div>
+
+    <div class="grid two">
+      <div>
+        <h4>Material de entrada</h4>
+        <ul id="labWordInputs"></ul>
+        <h4>Configuración recomendada</h4>
+        <div class="grid" style="gap:8px">
+          <div class="tool-card word"><div class="tool-name">Word Copilot</div><div class="small">Abre el documento limpio. Si tienes materiales sueltos, pégalos como texto plano al inicio o adjúntalos al chat de Copilot dentro de Word.</div></div>
+          <div class="tool-card copilot"><div class="tool-name">Copilot Chat (chat.copilot)</div><div class="small">Úsalo cuando los materiales están en distintos archivos. Permite hacer referencia a documentos de Microsoft 365 y a la web pública.</div></div>
+        </div>
+      </div>
+      <div>
+        <h4>Ejemplo de salida esperada</h4>
+        <div class="callout ok"><div class="callout-title" id="labWordExpectedTitle">Salida esperada</div><p id="labWordExpected"></p></div>
+        <h4>Errores comunes</h4>
+        <ul>
+          <li>Generar memo sin ordenar primero el contexto: Copilot completa huecos con texto genérico.</li>
+          <li>No pedir distinción entre hechos e hipótesis: el documento parece más sólido de lo que es.</li>
+          <li>Pegar nombres reales de cliente sin necesidad: viola política aunque no haya datos sensibles.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Paso 1 · Ordena el contexto antes de redactar</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Ordenar materiales · pegar en Copilot Chat</span><button class="copy-btn" data-copy-target="pWordOrder">Copiar</button></div><pre id="pWordOrder"></pre></div>
+
+    <h4>Paso 2 · Genera el memo ejecutivo</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Memo ejecutivo · pegar en Word Copilot</span><button class="copy-btn" data-copy-target="pWordMemo">Copiar</button></div><pre id="pWordMemo"></pre></div>
+
+    <h4>Paso 3 · Adapta por audiencia</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Tres versiones por audiencia</span><button class="copy-btn" data-copy-target="pWordAudience">Copiar</button></div><pre id="pWordAudience"></pre></div>
+
+    <h4>Paso 4 · Revisa con red team</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Red team del memo</span><button class="copy-btn" data-copy-target="pWordRedTeam">Copiar</button></div><pre id="pWordRedTeam"></pre></div>
+
+    <h4>Checklist de salida del laboratorio Word</h4>
+    <div class="check-grid" id="checkWord"></div>
+  </div>
+</section>
+
+<section class="section" id="lab-excel">
+  <div class="section-head"><div class="kicker">Laboratorio 2 · Excel + Copilot + Analyst</div><h3>De tabla a lectura de negocio: análisis accionable, no solo gráficos</h3><p class="lead">La meta no es generar visualizaciones, sino formular mejores preguntas y proponer acciones razonables. Excel Copilot trabaja sobre la tabla activa; Analyst permite exploraciones más profundas y multifuente.</p></div>
+  <div class="content">
+    <div class="lab-toolbar"><div class="role-active">Rol activo: <strong id="labExcelRole">—</strong></div><div class="small">Tiempo estimado: 35 min · Salida: lectura de negocio + tabla de métricas y visualizaciones</div></div>
+
+    <div class="grid two">
+      <div>
+        <h4>Datasets recomendados para tu rol</h4>
+        <ul id="labExcelDatasets"></ul>
+        <div class="callout warn"><div class="callout-title">Antes de cargar el dataset</div><p>Asegúrate de que la tabla tiene cabeceras claras, una fila por registro, formato uniforme y campos sin caracteres especiales. Si vas a usar Analyst, conviene exportar a CSV/XLSX limpio: Analyst funciona mejor sobre datos tabulares estructurados que sobre informes con celdas combinadas.</p></div>
+      </div>
+      <div>
+        <h4>Cuándo Excel Copilot, cuándo Analyst</h4>
+        <div class="grid" style="gap:8px">
+          <div class="tool-card excel"><div class="tool-name">Excel Copilot</div><div class="small">Para fórmulas, formato condicional, resúmenes rápidos, sugerencia de gráficos y explicación de fórmulas existentes sobre la tabla activa.</div></div>
+          <div class="tool-card analyst"><div class="tool-name">Analyst (agente)</div><div class="small">Para análisis exploratorio multifuente, hipótesis, cálculo de métricas, validación de fórmulas y explicación de patrones. Trabaja como analista junior con acceso a varias tablas y al chat.</div></div>
+          <div class="tool-card copilot"><div class="tool-name">Copilot Chat con archivo adjunto</div><div class="small">Útil cuando la tabla es pequeña y quieres pedir lectura de negocio sin moverte de Word o del chat.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Paso 1 · Comprende la tabla antes de extraer conclusiones</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Lectura inicial de la tabla</span><button class="copy-btn" data-copy-target="pExcelRead">Copiar</button></div><pre id="pExcelRead"></pre></div>
+
+    <h4>Paso 2 · Análisis accionable</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Análisis de negocio · Analyst o Copilot Chat</span><button class="copy-btn" data-copy-target="pExcelAnalysis">Copiar</button></div><pre id="pExcelAnalysis"></pre></div>
+
+    <h4>Paso 3 · Métricas, fórmulas y visualizaciones</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Métricas y visualizaciones</span><button class="copy-btn" data-copy-target="pExcelMetrics">Copiar</button></div><pre id="pExcelMetrics"></pre></div>
+
+    <h4>Paso 4 · Valida fórmulas y conclusiones</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Validación de fórmulas y conclusiones</span><button class="copy-btn" data-copy-target="pExcelValidate">Copiar</button></div><pre id="pExcelValidate"></pre></div>
+
+    <h4>Preguntas que debes hacer al cliente antes de cerrar el análisis</h4>
+    <ul id="labExcelQuestions"></ul>
+
+    <h4>Checklist de salida del laboratorio Excel + Analyst</h4>
+    <div class="check-grid" id="checkExcel"></div>
+  </div>
+</section>
+
+<section class="section" id="lab-ppt">
+  <div class="section-head"><div class="kicker">Laboratorio 3 · PowerPoint Copilot</div><h3>Narrativa ejecutiva: del memo y el análisis al deck que pide una decisión</h3><p class="lead">La presentación no decora: empuja una decisión. Toda diapositiva debe responder a: qué ocurre, por qué importa, qué evidencias hay, qué recomendamos y qué decisión necesitamos.</p></div>
+  <div class="content">
+    <div class="lab-toolbar"><div class="role-active">Rol activo: <strong id="labPptRole">—</strong></div><div class="small">Tiempo estimado: 30 min · Salida: deck de 6-8 diapositivas con notas de ponente</div></div>
+
+    <div class="grid two">
+      <div>
+        <h4>Estructura obligatoria del deck</h4>
+        <ol>
+          <li>Mensaje principal en una frase.</li>
+          <li>Contexto y objetivo de negocio.</li>
+          <li>Evidencias principales del análisis.</li>
+          <li>Problema u oportunidad detectada.</li>
+          <li>Opciones consideradas.</li>
+          <li>Recomendación de NATEEVO.</li>
+          <li>Riesgos, dependencias y decisiones necesarias.</li>
+          <li>Próximos pasos y decisión solicitada.</li>
+        </ol>
+      </div>
+      <div>
+        <h4>Configuración recomendada</h4>
+        <div class="grid" style="gap:8px">
+          <div class="tool-card ppt"><div class="tool-name">PowerPoint Copilot</div><div class="small">Crea presentación a partir de un documento de Word o de un brief. Mantiene el deck dentro del estilo corporativo. Verifica siempre las cifras propuestas.</div></div>
+          <div class="tool-card copilot"><div class="tool-name">Copilot Chat con referencia al memo</div><div class="small">Útil para iterar narrativa antes de generar el deck. Pide primero la estructura, valida, y solo entonces pide que la genere en PowerPoint.</div></div>
+          <div class="tool-card"><div class="tool-name">Gamma o Beautiful.ai (opcional)</div><div class="small">Para un primer borrador visual rápido o exploración de estructura. No reemplaza el deck corporativo final.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h4>Paso 1 · Estructura y mensaje por diapositiva</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Deck ejecutivo NATEEVO</span><button class="copy-btn" data-copy-target="pPptDeck">Copiar</button></div><pre id="pPptDeck"></pre></div>
+
+    <h4>Paso 2 · La diapositiva de decisión (obligatoria)</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Decisión que solicitamos</span><button class="copy-btn" data-copy-target="pPptDecision">Copiar</button></div><pre id="pPptDecision"></pre></div>
+
+    <h4>Paso 3 · Notas del ponente</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Notas de ponente por slide</span><button class="copy-btn" data-copy-target="pPptNotes">Copiar</button></div><pre id="pPptNotes"></pre></div>
+
+    <h4>Paso 4 · Crítica de la narrativa</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Crítica del deck (red team)</span><button class="copy-btn" data-copy-target="pPptCritique">Copiar</button></div><pre id="pPptCritique"></pre></div>
+
+    <h4>Checklist de salida del laboratorio PowerPoint</h4>
+    <div class="check-grid" id="checkPpt"></div>
+  </div>
+</section>
+
+<section class="section" id="lab-researcher">
+  <div class="section-head"><div class="kicker">Laboratorio 4 · Researcher</div><h3>Contraste externo con fuentes: cuando el caso necesita más que tus archivos</h3><p class="lead">Usa Researcher para tendencias, benchmarks, riesgos y comparativas. No lo uses para decorar el entregable con referencias irrelevantes. Researcher recopila, analiza y resume información de la web y de documentos de trabajo conectados.</p></div>
+  <div class="content">
+    <div class="lab-toolbar"><div class="role-active">Rol activo: <strong id="labResearcherRole">—</strong></div><div class="small">Tiempo estimado: 20 min · Salida: informe con fuentes y nivel de confianza</div></div>
+
+    <div class="grid two">
+      <div>
+        <h4>Cuándo usar Researcher</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Necesidad</th><th>Ejemplo aplicado a tu rol</th></tr></thead>
+          <tbody id="labResearcherCases"></tbody>
+        </table></div>
+      </div>
+      <div>
+        <h4>Configuración recomendada</h4>
+        <div class="grid" style="gap:8px">
+          <div class="tool-card researcher"><div class="tool-name">Researcher (agente)</div><div class="small">Investigación multietapa con citación de fuentes. Permite acotar el alcance: sectores, geografía, periodo. Devuelve niveles de confianza.</div></div>
+          <div class="tool-card copilot"><div class="tool-name">Copilot Chat con web</div><div class="small">Para búsquedas puntuales rápidas. Menos riguroso que Researcher para informes con fuentes.</div></div>
+          <div class="tool-card"><div class="tool-name">Claude / ChatGPT con búsqueda</div><div class="small">Útil para contrastar conclusiones de Researcher o para red team de la propia investigación.</div></div>
+        </div>
+        <div class="callout warn"><div class="callout-title">Riesgo principal</div><p>Researcher puede traer ruido si el alcance es demasiado amplio o presentar predicciones como hechos. Siempre revisa fechas, tipo de fuente y nivel de confianza antes de citar.</p></div>
+      </div>
+    </div>
+
+    <h4>Paso 1 · Investigación con fuentes</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Investigación con fuentes</span><button class="copy-btn" data-copy-target="pResearch">Copiar</button></div><pre id="pResearch"></pre></div>
+
+    <h4>Paso 2 · Depura las fuentes antes de usarlas</h4>
+    <div class="code-block"><div class="code-block-head"><span>Prompt · Calidad de fuentes</span><button class="copy-btn" data-copy-target="pResearchQuality">Copiar</button></div><pre id="pResearchQuality"></pre></div>
+
+    <h4>Checklist de salida del laboratorio Researcher</h4>
+    <div class="check-grid" id="checkResearcher"></div>
+  </div>
+</section>
+
+<section class="section" id="lab-outlook">
+  <div class="section-head"><div class="kicker">Bonus · Outlook · Teams · Cowork</div><h3>Resumir hilos, sintetizar reuniones y reutilizar contexto entre proyectos</h3><p class="lead">Tres usos complementarios que rara vez son el entregable final, pero ahorran tiempo en la fase de preparación y en el follow-up.</p></div>
+  <div class="content">
+    <div class="grid three">
+      <div class="tool-card outlook"><div class="tool-name">Outlook Copilot</div><div class="small">Resume hilos largos, genera borradores de respuesta y extrae compromisos. Útil para preparar follow-up tras la reunión sin enviarlo directamente.</div><div style="margin-top:12px"><button class="btn compact" data-copy-target="pOutlook">Copiar prompt</button></div></div>
+      <div class="tool-card teams"><div class="tool-name">Teams Copilot</div><div class="small">Resumen de reunión con acuerdos, tareas y preguntas abiertas. Verifica siempre los responsables y fechas que extraiga: las inferencias en transcripciones suelen estar mal asignadas.</div><div style="margin-top:12px"><button class="btn compact" data-copy-target="pTeams">Copiar prompt</button></div></div>
+      <div class="tool-card"><div class="tool-name">Cowork</div><div class="small">Para organizar la carpeta del proyecto, reutilizar contexto entre archivos y mantener una biblioteca personal de prompts. Funciona como sistema de archivos persistente.</div><div style="margin-top:12px"><button class="btn compact" data-copy-target="pCowork">Copiar prompt</button></div></div>
+    </div>
+    <div class="code-block hidden"><pre id="pOutlook"></pre></div>
+    <div class="code-block hidden"><pre id="pTeams"></pre></div>
+    <div class="code-block hidden"><pre id="pCowork"></pre></div>
+
+    <div class="callout info" style="margin-top:18px"><div class="callout-title">Sobre el follow-up</div><p>Redacta siempre el email de seguimiento como <strong>borrador no enviado</strong>. La automatización del envío sin revisión es la principal vía por la que un agente inventa un compromiso, un responsable o una fecha que no existe.</p></div>
+  </div>
+</section>
+<section class="section" id="builder">
+  <div class="section-head"><div class="kicker">Paso 7 · Builder del paquete ejecutivo</div><h3>Construye tu prompt maestro reutilizable</h3><p class="lead">Este builder genera el prompt que transforma materiales dispersos en un paquete ejecutivo completo (memo + análisis + investigación + deck + follow-up). Ajusta los campos y a la derecha verás el prompt en vivo, la especificación interna y el checklist de validación final.</p></div>
+  <div class="content">
+    <div class="tabs" role="tablist"><button class="tab active" data-preview="prompt">Prompt maestro</button><button class="tab" data-preview="spec">Especificación</button><button class="tab" data-preview="checklist">Checklist validación</button></div>
+    <div class="builder-grid">
+      <div class="builder-form">
+        <div class="field"><label>Cliente o sector <span class="hint">si es real, anonimiza</span></label><input id="bClient" type="text"></div>
+        <div class="field"><label>Tipo de proyecto</label><select id="bProject"><option>CRM</option><option>Martech</option><option>Data Intelligence</option><option>CRO / CJO</option><option>eCommerce</option><option>Marketing Automation</option><option>Customer Data Activation</option><option>Propuesta comercial</option><option>Otro</option></select></div>
+        <div class="field"><label>Audiencia del entregable</label><select id="bAudience"><option>Dirección del cliente</option><option>Equipo técnico / Data / CRM</option><option>Equipo comercial NATEEVO</option><option>Comité mixto</option><option>Equipo interno NATEEVO</option></select></div>
+        <div class="field"><label>Objetivo del entregable</label><textarea id="bObjective" placeholder="Ej. Decidir si seguimos con la fase de discovery o pasamos directamente a propuesta..."></textarea></div>
+        <div class="field"><label>Materiales disponibles <span class="hint">una línea por material</span></label><textarea id="bMaterials" placeholder="Notas de discovery&#10;Acta de Teams&#10;Brief comercial&#10;Tabla de campañas CRM..."></textarea></div>
+        <div class="field"><label>Decisión que queremos impulsar</label><textarea id="bDecision" placeholder="Ej. Aprobar un piloto de personalización en checkout durante 6 semanas..."></textarea></div>
+        <div class="field"><label>Datos sensibles a excluir o anonimizar</label><textarea id="bSensitive" placeholder="Nombres de personas, cifras absolutas de revenue, contratos..."></textarea></div>
+        <div class="grid two">
+          <div class="field"><label>Herramientas previstas</label><input id="bTools" type="text" placeholder="Word Copilot, Analyst, PowerPoint Copilot, Researcher"></div>
+          <div class="field"><label>Versión</label><input id="bVersion" type="text" value="v0.1"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn compact" id="prefillRole" type="button">Rellenar con el rol activo</button>
+          <button class="btn compact danger" id="clearBuilder" type="button">Limpiar campos</button>
+        </div>
+      </div>
+      <div>
+        <div class="preview"><div class="preview-head"><span id="previewTitle">Prompt maestro</span><span class="live">EN VIVO</span></div><div class="preview-body" id="builderPreview"></div></div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap"><button class="btn primary" data-copy-target="builderPreview">Copiar vista activa</button><button class="btn ghost compact" id="downloadSpec" type="button">Descargar especificación .md</button></div>
+        <div class="linter-list" id="linterList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="comparativa">
+  <div class="section-head"><div class="kicker">Comparativa de herramientas</div><h3>Cuándo usar cada motor: Copilot vs ChatGPT vs Claude vs Gamma vs Cowork</h3><p class="lead">Comparativa honesta. Si Copilot no es la mejor opción para algo, hay que decirlo. La regla: usa Microsoft 365 Copilot cuando trabajas dentro de archivos M365; cambia a ChatGPT o Claude cuando necesitas red team, crítica externa o reformulación.</p></div>
+  <div class="content">
+    <div class="table-wrap"><table>
+      <thead><tr><th>Herramienta</th><th>Uso recomendado en NATEEVO</th><th>Cuándo evitar</th><th>Riesgo principal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Microsoft 365 Copilot</strong></td><td>Producción ejecutiva dentro de Word, Excel, PowerPoint, Outlook y Teams. Aprovecha permisos y documentos del tenant.</td><td>Cuando necesitas crítica externa o pensar contra tu propio criterio.</td><td>Narrativa plana si el input es débil.</td></tr>
+        <tr><td><strong>Word Copilot</strong></td><td>Memo, propuesta preliminar, informe de discovery, sumario ejecutivo.</td><td>Documentos muy largos sin estructura previa.</td><td>Texto genérico si no acotas audiencia y decisión.</td></tr>
+        <tr><td><strong>Excel Copilot</strong></td><td>Fórmulas, análisis simple de tablas, formato condicional, gráficos sugeridos.</td><td>Análisis multifuente o exploración compleja: usa Analyst.</td><td>Cálculos sobre datos no limpios o periodos no comparables.</td></tr>
+        <tr><td><strong>Analyst (agente)</strong></td><td>Exploración de datos, hipótesis, validación de fórmulas y métricas, análisis multitabla.</td><td>Datos muy pequeños o tareas que un humano resuelve en 5 minutos.</td><td>Requiere validación de fórmulas y supuestos: no tomes conclusiones sin revisar.</td></tr>
+        <tr><td><strong>PowerPoint Copilot</strong></td><td>Deck corporativo final dentro de M365. Genera presentación a partir de documentos de Word.</td><td>Brainstorm visual rápido: mejor Gamma.</td><td>Cifras inventadas o slides decorativas sin mensaje. Verifica siempre.</td></tr>
+        <tr><td><strong>Researcher</strong></td><td>Investigación con fuentes, contraste externo, tendencias, contexto competitivo, síntesis multietapa.</td><td>Preguntas factuales rápidas o consultas internas.</td><td>Ruido si el alcance es amplio; mezcla de hechos y predicciones.</td></tr>
+        <tr><td><strong>Outlook Copilot</strong></td><td>Resumen de hilos, borrador de respuestas, extracción de compromisos.</td><td>Compromisos formales con cliente sin revisión humana.</td><td>Inventa responsables o fechas inferidas mal del hilo.</td></tr>
+        <tr><td><strong>Teams Copilot</strong></td><td>Síntesis de reuniones: acuerdos, tareas, preguntas abiertas.</td><td>Reuniones con transcripción muy ruidosa o multilingüe.</td><td>Asignación incorrecta de quién dijo qué.</td></tr>
+        <tr><td><strong>Copilot Chat</strong></td><td>Trabajo cross-archivo dentro del tenant. Búsquedas internas con Graph.</td><td>Cuando necesitas un entregable concreto dentro de Word/Excel/PowerPoint.</td><td>Respuestas planas si no precisas archivo de referencia.</td></tr>
+        <tr><td><strong>ChatGPT</strong></td><td>Ideación, red team, reformulación, crítica externa, mejora de prompts.</td><td>Documentos con datos sensibles o información de cliente identificable.</td><td>Requiere control estricto de fuentes y datos.</td></tr>
+        <tr><td><strong>Claude</strong></td><td>Documentos largos, edición fina, lectura crítica, artifacts vivos (mini-dashboards, tablas, prototipos).</td><td>Producción final corporativa que debe quedar en M365.</td><td>No reemplaza el formato corporativo de PowerPoint.</td></tr>
+        <tr><td><strong>Gamma</strong></td><td>Primer borrador visual rápido para explorar estructura narrativa.</td><td>Deck corporativo final.</td><td>Puede alejarse del estilo NATEEVO o del cliente.</td></tr>
+        <tr><td><strong>Beautiful.ai</strong></td><td>Deck limpio con poca intervención de diseño.</td><td>Cuando la narrativa consultiva exige control fino.</td><td>Menor control sobre estructura argumental.</td></tr>
+        <tr><td><strong>Cowork</strong></td><td>Sistema de archivos persistente para reutilizar contexto, organizar carpetas, mantener biblioteca de prompts.</td><td>Tareas puntuales que no necesitan persistencia.</td><td>No es generación de entregable: es infraestructura de trabajo.</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<section class="section" id="arsenal">
+  <div class="section-head"><div class="kicker">Arsenal · prompts reutilizables</div><h3>Biblioteca compacta filtrable por uso y herramienta</h3><p class="lead">Copia, adapta y guarda en tu biblioteca personal. Regla: no uses los prompts de forma mecánica. Añade siempre contexto, audiencia, restricciones y criterio de calidad.</p></div>
+  <div class="content">
+    <input class="search" id="arsenalSearch" placeholder="Buscar prompt por uso, herramienta o palabra clave...">
+    <div class="filterbar" id="arsenalFilters"></div>
+    <div class="grid two" id="arsenalGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="checklist">
+  <div class="section-head"><div class="kicker">Validación final</div><h3>Checklists antes de compartir con cliente o dirección</h3><p class="lead">Tres checklists persistentes. Se guardan en este navegador para que puedas reabrir el laboratorio y seguir desde donde lo dejaste.</p></div>
+  <div class="content">
+    <h4>Checklist 1 · Calidad del entregable</h4>
+    <div class="check-grid" id="checkFinal"></div>
+    <h4>Checklist 2 · Calidad del prompt</h4>
+    <div class="check-grid" id="checkPrompt"></div>
+    <h4>Checklist 3 · Datos y privacidad</h4>
+    <div class="check-grid" id="checkData"></div>
+    <div class="scorebox" style="margin-top:16px"><div class="scoretext" id="finalProgressLabel">Progreso global: 0%</div><div class="progress"><span id="finalProgress"></span></div><div class="recommendation" id="finalProgressRec">Marca los controles a medida que los completas en cada laboratorio.</div></div>
+    <div style="margin-top:14px"><button class="btn compact danger" id="resetChecklists" type="button">Reiniciar todos los checklists</button></div>
+  </div>
+</section>
+
+<section class="section" id="manual-personal">
+  <div class="section-head"><div class="kicker">Cierre · Manual personal</div><h3>Hábitos nuevos que adoptarás tras esta sesión</h3><p class="lead">Compromiso de uso real. Apunta entre 3 y 7 hábitos concretos, cuándo los usarás y qué riesgo debes controlar. Se guarda en tu navegador.</p></div>
+  <div class="content">
+    <div id="habitsList"></div>
+    <button class="btn compact" id="addHabit" type="button" style="margin-top:10px">Añadir hábito</button>
+  </div>
+</section>
+
+<section class="section" id="kit">
+  <div class="section-head"><div class="kicker">Deployment Pack</div><h3>Descarga tu paquete reutilizable</h3><p class="lead">Genera un archivo con prompts, especificación, checklists y arsenal personalizado al rol activo. Guárdalo como base para tus próximos proyectos.</p></div>
+  <div class="content">
+    <pre class="kit-tree" id="kitTree"></pre>
+    <div class="callout warn"><div class="callout-title">Antes de usarlo con cliente</div><p>Este pack es material de trabajo y formación. Revísalo con criterio profesional antes de aplicarlo: los prompts son plantillas, no decisiones. Si vas a integrarlo en herramientas reales (CRM, automatizaciones, agentes), pásalo por revisión de owner y seguridad.</p></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn primary" id="downloadPack">Generar y descargar ZIP</button><button class="btn ghost" id="downloadJson">Descargar JSON de respaldo</button><button class="btn ghost" id="downloadAllMd">Descargar prompts en .md</button></div>
+  </div>
+</section>
+
+<footer class="footer"><span>NATEEVO · Productividad con IA · Día 3 · Microsoft 365 Copilot</span><span>HTML estático · Laboratorio interactivo · v1</span></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script>
+const $ = (id)=>document.getElementById(id);
+const splitLines = (s)=>(s||'').split(/\n|;/).map(x=>x.trim()).filter(Boolean);
+const bullet = (arr)=>arr.map(x=>`- ${x}`).join('\n');
+const toSlug = (s)=>(s||'paquete').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+
+const state = {
+  roleId: localStorage.getItem('m365.role') || 'direccion',
+  preview: 'prompt',
+  checks: JSON.parse(localStorage.getItem('m365.checks')||'{}'),
+  habits: JSON.parse(localStorage.getItem('m365.habits')||'[]'),
+  builder: JSON.parse(localStorage.getItem('m365.builder')||'{}')
+};
+
+const ROLES = {
+  direccion:{code:'DIR',title:'Dirección · cliente o NATEEVO',area:'Dirección ejecutiva',audience:'Dirección general, comité de dirección',cases:['Memo de diagnóstico para comité','Resumen ejecutivo de propuesta','Briefing previo de reunión con cliente C-level','Decisión sobre seguir/parar proyecto'],
+    inputs:['Notas o transcripción de Teams del último steering','Propuesta o documento de proyecto vigente','Acta de la última reunión validada','Dashboard ejecutivo o reporting','Documento de objetivos del cliente'],
+    datasets:['Reporting ejecutivo semanal o mensual','Tabla de KPIs estratégicos (revenue, conversión, NPS, retención)','Hitos del proyecto y desviaciones','Comparativa de objetivos vs realidad'],
+    questions:['¿La decisión está respaldada por datos o por sensación?','¿Qué riesgo asumimos si no decidimos esta semana?','¿Quién es el responsable visible de la decisión?','¿Qué información falta para cerrar la decisión?','¿La recomendación se mantiene si cambia el contexto del cliente?'],
+    expected:'Memo de 2 páginas: 5 líneas de resumen ejecutivo, contexto confirmado, decisión solicitada, opciones con pros/contras, riesgo de no decidir y próximos pasos. Sin jerga consultiva.',
+    researchTopics:[['Tendencias','Adopción de IA generativa en dirección ejecutiva del sector del cliente.'],['Benchmark','Modelos de decisión ágil en comités de dirección de empresas comparables.'],['Riesgos','Gobernanza de IA, dependencia tecnológica, presión de plazos.'],['Comparativa','Casos públicos de proyectos similares y sus desenlaces.'],['Contexto sectorial','Movimientos competitivos relevantes para la decisión.']],
+    rolePromptHint:'consultor senior de NATEEVO presentando a dirección general',outputForBuilder:'Memo de 2 páginas + slide de decisión + email de seguimiento no enviado + checklist de validación.'},
+  comercial:{code:'COM',title:'Comercial · ventas y propuestas',area:'Desarrollo de negocio',audience:'Equipo comercial NATEEVO, account managers, dirección comercial',cases:['Propuesta preliminar tras discovery','Briefing previo de reunión comercial','Respuesta a RFP','QA de propuesta antes de enviar','Follow-up post-presentación'],
+    inputs:['Notas de la reunión de discovery','RFP o brief del cliente','Propuesta o SOW de proyecto anterior similar','Pricing autorizado','Catálogo de servicios NATEEVO'],
+    datasets:['Pipeline de oportunidades','Histórico de propuestas ganadas y perdidas','Tabla de pricing por tipo de proyecto','Tasas de cierre por sector'],
+    questions:['¿La propuesta promete algo que delivery no puede sostener?','¿Hay ROI o KPIs cuantificados sin fuente?','¿El alcance excede al SOW que aprobará delivery?','¿Procurement podrá objetar precios, condiciones o plazos?','¿Hay un competidor conocido y cómo nos diferenciamos?'],
+    expected:'Propuesta preliminar de 3-5 páginas con problema del cliente, alcance, valor esperado, fases, dependencias y precio orientativo. Con etiqueta [VERIFICAR] en toda cifra no respaldada.',
+    researchTopics:[['Tendencias','Buenas prácticas de pricing y modelos de contrato en consultoría digital.'],['Benchmark','Propuestas competidoras conocidas para el mismo tipo de problema.'],['Riesgos','Cláusulas de procurement habituales en el sector del cliente.'],['Comparativa','Pricing de competidores directos cuando es público.'],['Contexto sectorial','Procesos de compra y tiempos de decisión típicos en el sector.']],
+    rolePromptHint:'consultor senior de NATEEVO preparando propuesta comercial',outputForBuilder:'Propuesta preliminar + briefing previo de reunión + email de follow-up no enviado + slide de cierre comercial.'},
+  crm:{code:'CRM',title:'CRM · Marketing Automation',area:'CRM, MarTech, Marketing Automation',audience:'Marketing leads, CRM managers, equipo de campañas',cases:['Análisis de campañas CRM por segmento','Diseño de journey de activación','Recomendación de quick wins en automation','Auditoría de stack Martech'],
+    inputs:['Exportación de rendimiento de campañas (CSV)','Mapa actual de journeys y triggers','Inventario de herramientas Martech','Política de consentimiento y opt-in','Definición de audiencias y segmentos'],
+    datasets:['Rendimiento de campañas: campana, segmento, canal, coste, aperturas, clics, conversión, ingresos, bajas, recurrencia','Marketing automation: journey, audiencia, trigger, conversión, tiempo hasta conversión, opt-out, ingresos atribuidos','Funnel de email: envío, entrega, apertura, clic, conversión, baja'],
+    questions:['¿La atribución es last click, multi-touch o data-driven?','¿Hay solapamiento entre segmentos que infle conversión?','¿Las bajas están concentradas en una campaña, canal o segmento?','¿Hay consentimiento explícito para los journeys propuestos?','¿El coste incluye solo media o también licencias y equipo?'],
+    expected:'Lectura de negocio del rendimiento por campaña/segmento + 3 tendencias + 3 outliers + métricas con fórmula + 5 hipótesis priorizadas por impacto/esfuerzo/riesgo.',
+    researchTopics:[['Tendencias','Estado de personalización CRM y journey orchestration en el sector.'],['Benchmark','Tasas de apertura, clic y conversión por sector y canal en 2025-2026.'],['Riesgos','Privacidad, consentimiento, deliverability y reputación de dominio.'],['Comparativa','Plataformas de Marketing Automation y CDP relevantes.'],['Contexto sectorial','Cambios en comportamiento de consumidor que afecten al CRM.']],
+    rolePromptHint:'consultor senior de NATEEVO especializado en CRM y Marketing Automation',outputForBuilder:'Memo CRM con diagnóstico + mapa de journeys priorizado + deck para marketing lead + email de follow-up no enviado.'},
+  data:{code:'DATA',title:'Data · Analyst, reporting',area:'Data Intelligence, BI',audience:'Data analysts, marketing leads, dirección de proyecto',cases:['Reporting ejecutivo semanal','Análisis de funnel ecommerce','Lectura de negocio de un dataset','Detección de outliers y anomalías','Auditoría de calidad de datos'],
+    inputs:['Export de dashboard autorizado','CSV/XLSX de la campaña o periodo','Definición vigente de KPIs','Reporting de la semana anterior','Documento de objetivos aprobados'],
+    datasets:['Funnel ecommerce: sesiones, PDP views, add to cart, checkout, compra, abandono, revenue, AOV, dispositivo, canal','KPIs ejecutivos: revenue, conversión, ticket medio, retención, frecuencia, NPS','Cohortes de retención y churn'],
+    questions:['¿Los periodos comparados son representativos o estacionales?','¿Las definiciones de KPI han cambiado entre periodos?','¿Hay cambios recientes en tracking o consentimiento?','¿Los outliers son anomalía real o error de datos?','¿Las conclusiones distinguen correlación de causalidad?'],
+    expected:'Informe ejecutivo con rendimiento del periodo, variaciones explicadas, hipótesis sobre causas, riesgos de interpretación, decisiones necesarias y siguientes experimentos.',
+    researchTopics:[['Tendencias','Buenas prácticas de medición de funnel y atribución multi-touch.'],['Benchmark','Tasas de conversión y AOV típicos del sector y categoría.'],['Riesgos','Privacy, tracking degradado, consentimiento, calidad de datos.'],['Comparativa','Herramientas de analítica y BI relevantes.'],['Contexto sectorial','Cambios regulatorios o tecnológicos en medición digital.']],
+    rolePromptHint:'analista de negocio senior de NATEEVO',outputForBuilder:'Informe ejecutivo semanal + tabla de métricas con fórmulas + slide de variaciones y decisiones + checklist de calidad de datos.'},
+  cro:{code:'CRO',title:'CRO · CJO · UX',area:'Conversion Rate Optimization',audience:'CRO leads, UX researchers, product owners, marketing',cases:['Diagnóstico de fricciones en checkout','Backlog priorizado de hipótesis CRO','Análisis post-test de un experimento','Mapa de journeys y puntos de fricción','Recomendación de quick wins UX'],
+    inputs:['Export de analytics del funnel','Heatmaps, session recordings, encuestas','Research UX previo','Backlog actual de hipótesis','Resultados de experimentos anteriores'],
+    datasets:['Funnel CRO: sesiones, vistas, fricciones, tasa de abandono por etapa, dispositivo y canal','Backlog: hipótesis, evidencia, impacto, esfuerzo, riesgo, dependencia, estado','Resultados de tests A/B con tamaño de muestra y significancia'],
+    questions:['¿La hipótesis tiene evidencia cualitativa y cuantitativa?','¿La muestra es suficiente para llegar a significancia estadística?','¿Hay dependencias técnicas que bloqueen el test?','¿La métrica primaria refleja realmente la decisión de negocio?','¿El test no canibaliza otra parte del funnel?'],
+    expected:'Backlog priorizado con hipótesis, evidencia, segmento, cambio propuesto, métrica primaria, impacto estimado, esfuerzo, riesgo, dependencia y prioridad.',
+    researchTopics:[['Tendencias','Patrones UX en checkout móvil y abandono en ecommerce 2025-2026.'],['Benchmark','Tasas de conversión por dispositivo, categoría y AOV.'],['Riesgos','Sesgos en tests, contaminación de cohortes, regresión a la media.'],['Comparativa','Plataformas de experimentación y heatmaps.'],['Contexto sectorial','Cambios de comportamiento por dispositivo en el sector.']],
+    rolePromptHint:'consultor senior CRO y UX de NATEEVO',outputForBuilder:'Diagnóstico de fricciones + backlog priorizado + ficha de experimento para el siguiente sprint + slide de quick wins.'},
+  cda:{code:'CDA',title:'Customer Data Activation',area:'CDA, CDP, first-party data',audience:'CDA leads, CRM managers, data leads, martech leads',cases:['Casos de uso priorizados de activación','Roadmap de CDP / data activation','Análisis de consentimiento y disponibilidad de datos','Diseño de audiencias y journeys','Riesgos de activación y dependencias'],
+    inputs:['Notas de discovery sobre data activation','Inventario de fuentes de datos (CRM, web, app, BI)','Política de consentimiento y opt-in','Documento de arquitectura CDP/CRM','Backlog de casos de uso existente'],
+    datasets:['Inventario de canales y datos disponibles por canal','Audiencias y segmentos definidos con tamaño y disponibilidad','Casos de uso con datos requeridos, canal, KPI e impacto estimado','Matriz de consentimiento por canal y propósito'],
+    questions:['¿Hay consentimiento explícito para el propósito de cada caso de uso?','¿El dato necesario está disponible, calificado y actualizado?','¿Hay owner técnico y de negocio para cada caso?','¿La activación necesita CDP o se puede hacer desde CRM?','¿Qué casos son piloto y qué casos son industrialización?'],
+    expected:'Backlog CDA: caso de uso, objetivo, audiencia, datos requeridos, consentimiento, canal, KPI, impacto, esfuerzo, riesgo, dependencia, prioridad y preguntas pendientes.',
+    researchTopics:[['Tendencias','Estado actual de CDP, first-party data y activación en el sector.'],['Benchmark','Casos de uso típicos de CDA por industria.'],['Riesgos','Privacidad, consentimiento, dependencia tecnológica, calidad de datos.'],['Comparativa','Plataformas CDP y soluciones de activación relevantes.'],['Contexto sectorial','Cambios regulatorios y de cookies que afecten a la activación.']],
+    rolePromptHint:'consultor senior de NATEEVO en Customer Data Activation',outputForBuilder:'Memo de oportunidad CDA + backlog priorizado de casos de uso + deck de roadmap + slide de quick wins.'},
+  delivery:{code:'PM',title:'Delivery · Project Management',area:'Delivery, gestión de proyecto',audience:'Project managers, delivery leads, equipo de proyecto, cliente operativo',cases:['Acta de reunión con compromisos','Status semanal del proyecto','Análisis de riesgos y dependencias','Memo de cambio de alcance','Resumen de retro de fase'],
+    inputs:['Transcripción o notas de la reunión de Teams','Plan de proyecto vigente','Matriz de riesgos','Backlog y burndown actual','Histórico de decisiones del proyecto'],
+    datasets:['Tabla de hitos del proyecto con fechas planeadas y reales','Backlog de tareas con responsable, esfuerzo, estado','Matriz de riesgos con probabilidad, impacto, mitigación, owner','Histórico de cambios de alcance'],
+    questions:['¿Hay compromisos asumidos en la reunión sin owner ni fecha?','¿Algún riesgo nuevo no está en la matriz?','¿La desviación actual exige cambio de alcance formal?','¿Las dependencias externas tienen confirmación o son supuestos?','¿El cliente conoce los pendientes y riesgos críticos?'],
+    expected:'Acta validada con acuerdos, decisiones, tareas con owner y fecha, riesgos nuevos, dependencias y pendientes. Borrador de email de seguimiento no enviado.',
+    researchTopics:[['Tendencias','Modelos de gobernanza de proyecto digital y agile delivery.'],['Benchmark','Buenas prácticas de status reporting en consultoría.'],['Riesgos','Drift de alcance, dependencia de cliente, calidad y plazo.'],['Comparativa','Herramientas de project management relevantes.'],['Contexto sectorial','Cambios organizativos del cliente que afecten al proyecto.']],
+    rolePromptHint:'project manager senior de NATEEVO',outputForBuilder:'Acta validada + status ejecutivo de proyecto + matriz de riesgos actualizada + email de follow-up no enviado.'},
+  operaciones:{code:'OPS',title:'Operaciones · Stack Martech',area:'Operaciones, Martech, gobierno tecnológico',audience:'IT, dirección de operaciones, owners de plataformas',cases:['Auditoría de stack Martech','Roadmap de consolidación de herramientas','Análisis de duplicidades e integraciones','Memo de coste y riesgo del stack','Gobernanza de accesos y permisos'],
+    inputs:['Inventario de herramientas (CSV/Excel)','Diagrama de arquitectura actual','Contratos y costes vigentes','Mapa de responsables por herramienta','Histórico de incidencias o degradaciones'],
+    datasets:['Auditoría Martech: herramienta, uso, coste, integración, responsable, criticidad, redundancia, riesgo','Mapa de integraciones entre herramientas con dirección y volumen','Matriz de accesos y permisos por equipo','Histórico de incidencias y SLAs'],
+    questions:['¿Qué herramientas son redundantes o están infrautilizadas?','¿Las integraciones críticas tienen owner técnico identificado?','¿Hay dependencias de un solo proveedor con riesgo de continuidad?','¿Los accesos siguen el principio de mínimo privilegio?','¿El coste anual está justificado por uso y valor de negocio?'],
+    expected:'Memo de auditoría con mapa actual, duplicidades, riesgos, oportunidades de consolidación, dependencias críticas y roadmap por fases.',
+    researchTopics:[['Tendencias','Consolidación y simplificación de stacks Martech en 2025-2026.'],['Benchmark','Stacks típicos por tamaño de empresa y sector.'],['Riesgos','Vendor lock-in, calidad de integraciones, continuidad de soporte.'],['Comparativa','Alternativas relevantes a herramientas críticas del stack.'],['Contexto sectorial','Cambios regulatorios o tecnológicos que afecten al stack.']],
+    rolePromptHint:'consultor senior de NATEEVO en operaciones y gobierno Martech',outputForBuilder:'Memo de auditoría + mapa de stack + roadmap por fases + deck para dirección de operaciones.'}
+};
+
+// Plantillas de prompts. Los prompts se generan a partir del rol activo.
+function buildPrompts(role){
+  const r = role;
+  const audi = r.audience;
+  const inputsList = r.inputs.join(', ');
+  return {
+    wordOrder: `Actúa como ${r.rolePromptHint}. Voy a proporcionarte materiales dispersos de un proyecto o reunión con cliente (${inputsList}).\n\nAntes de redactar ningún documento, organiza la información en esta tabla:\n1. Hechos confirmados.\n2. Objetivos del cliente.\n3. Problemas detectados.\n4. Hipótesis razonables.\n5. Riesgos y dependencias.\n6. Información pendiente.\n7. Decisiones que necesitamos del cliente.\n8. Preguntas críticas para la próxima reunión.\n\nReglas:\n- No inventes datos.\n- Marca como [NO LOCALIZADO] lo que no aparezca en los materiales.\n- Distingue [HECHO], [HIPOTESIS], [PENDIENTE] y [VERIFICAR].\n- Usa lenguaje claro y profesional, sin jerga consultiva genérica.\n- Audiencia objetivo del documento posterior: ${audi}.`,
+    wordMemo: `Actúa como ${r.rolePromptHint}. A partir de los documentos y notas proporcionados, crea un memo ejecutivo de máximo 2 páginas para preparar una reunión con ${audi.toLowerCase()}.\n\nEstructura obligatoria:\n1. Resumen ejecutivo en 5 líneas.\n2. Contexto confirmado.\n3. Objetivos del cliente.\n4. Hallazgos clave.\n5. Riesgos y dependencias.\n6. Decisiones que necesitamos del cliente.\n7. Preguntas críticas para la próxima reunión.\n8. Próximos pasos recomendados.\n\nReglas:\n- Distingue entre [HECHO], [HIPOTESIS], [RECOMENDACION], [PENDIENTE] y [VERIFICAR].\n- No inventes cifras, fechas, responsables, costes ni compromisos.\n- Marca cualquier afirmación que no esté respaldada por los documentos.\n- Usa lenguaje ejecutivo, claro y accionable.\n- Evita tono genérico de consultoría.\n- Salida esperada: ${r.expected}`,
+    wordAudience: `Reescribe el memo en tres estilos:\n1. Para dirección general del cliente.\n2. Para equipo técnico / data / CRM.\n3. Para equipo comercial de NATEEVO.\n\nMantén los hechos, pero adapta tono, nivel de detalle y énfasis.\n\nIndica:\n- Qué información se mantiene igual.\n- Qué información cambia de énfasis.\n- Qué riesgo aparece en cada versión.\n- Qué versión es más adecuada para la próxima reunión y por qué.\n\nAudiencia principal a la que vamos a presentar primero: ${audi}.`,
+    wordRedTeam: `Revisa críticamente el memo como si fueras responsable de calidad antes de enviarlo a cliente.\n\nDevuelve una tabla con:\n1. Afirmación problemática o débil.\n2. Tipo de problema: falta de fuente, ambigüedad, exceso de confianza, riesgo comercial, riesgo técnico, riesgo de datos.\n3. Impacto si se envía sin corregir.\n4. Corrección recomendada.\n5. Nivel de prioridad: alto, medio o bajo.\n\nNo reescribas todo el documento. Detecta problemas concretos.\nContexto del rol que va a enviar el memo: ${r.title}.`,
+    excelRead: `Actúa como analista de negocio de NATEEVO trabajando para un perfil de ${r.title}.\n\nAntes de analizar conclusiones, revisa la tabla y responde:\n1. Qué representa cada fila.\n2. Qué representa cada columna.\n3. Qué columnas parecen métricas, dimensiones o identificadores.\n4. Qué campos tienen valores faltantes, inconsistentes o ambiguos.\n5. Qué métricas se pueden calcular de forma fiable.\n6. Qué métricas no deberían calcularse sin información adicional.\n\nNo extraigas recomendaciones todavía. Primero valida la estructura de los datos.\nDatasets típicos de este rol: ${r.datasets.join(' | ')}.`,
+    excelAnalysis: `Actúa como analista de negocio de NATEEVO. Analiza esta tabla pensando en una recomendación para ${audi.toLowerCase()}.\n\nDevuelve:\n1. Tres tendencias principales.\n2. Tres anomalías o valores atípicos.\n3. Métricas que deberíamos calcular.\n4. Riesgos de interpretación de los datos.\n5. Segmentos o dimensiones que conviene cruzar.\n6. Visualizaciones recomendadas.\n7. Preguntas que harías al cliente antes de tomar decisiones.\n8. Resumen ejecutivo de máximo 150 palabras.\n9. Recomendaciones accionables priorizadas por impacto, esfuerzo y riesgo.\n\nReglas:\n- No modifiques los datos originales sin indicarlo.\n- No asumas causalidad si solo hay correlación.\n- Señala campos incompletos o poco fiables.\n- Si propones una fórmula, explícala.\n- Si detectas un posible error de datos, márcalo como [VERIFICAR].`,
+    excelMetrics: `Propón las métricas y visualizaciones más útiles para explicar este análisis a ${audi.toLowerCase()}.\n\nPara cada métrica, indica:\n- Nombre.\n- Fórmula.\n- Columnas necesarias.\n- Interpretación de negocio.\n- Riesgo de interpretación.\n\nPara cada visualización, indica:\n- Tipo de gráfico.\n- Eje X.\n- Eje Y.\n- Segmento o filtro recomendado.\n- Mensaje que debería transmitir.`,
+    excelValidate: `Revisa las fórmulas, métricas y conclusiones generadas. Comprueba:\n1. Si las fórmulas son coherentes.\n2. Si hay divisiones por cero o datos incompletos.\n3. Si las métricas comparan periodos o segmentos equivalentes.\n4. Si alguna conclusión confunde correlación con causalidad.\n5. Qué conclusiones son sólidas y cuáles requieren validación adicional.\n\nDevuelve el resultado en una tabla con: elemento revisado, diagnóstico, riesgo, corrección recomendada.`,
+    pptDeck: `Crea una presentación ejecutiva para un comité de ${audi.toLowerCase()} a partir del memo y el análisis proporcionados.\n\nContexto: NATEEVO presenta una recomendación sobre ${r.area}.\n\nEstructura de 8 diapositivas:\n1. Mensaje principal.\n2. Contexto y objetivo de negocio.\n3. Evidencias principales.\n4. Problema u oportunidad detectada.\n5. Opciones consideradas.\n6. Recomendación de NATEEVO.\n7. Riesgos, dependencias y decisiones necesarias.\n8. Próximos pasos.\n\nPara cada diapositiva incluye:\n- Título orientado a conclusión.\n- 3-5 bullets máximo.\n- Visual sugerido.\n- Nota del ponente.\n- Frase clave que debe recordar el cliente.\n\nReglas:\n- No uses lenguaje genérico.\n- No inventes cifras.\n- Marca como [VERIFICAR] cualquier dato no confirmado.\n- La presentación debe pedir una decisión concreta al final.`,
+    pptDecision: `Añade una diapositiva titulada "Decisión que solicitamos". Debe explicar:\n1. Qué decisión debe tomar el cliente.\n2. Qué opciones tiene.\n3. Qué recomendamos.\n4. Qué riesgo asume si no decide.\n5. Qué información falta para cerrar la decisión.\n\nLa slide debe poder entenderse de forma independiente, sin contexto previo del deck.`,
+    pptNotes: `Genera notas de ponente por slide. Para cada slide incluye:\n- Mensaje principal que debe transmitir el ponente.\n- Transición a la siguiente slide.\n- Posible pregunta difícil del cliente sobre esta slide.\n- Respuesta breve, honesta y basada en evidencia.\n- Datos clave que el ponente debe tener listos.\n\nNo uses frases vacías tipo "explicar bien" o "transmitir confianza". Sé operativo.`,
+    pptCritique: `Revisa la presentación como si fueras un socio senior antes de una reunión con cliente. Evalúa:\n1. Si la historia conduce a una decisión clara.\n2. Si cada slide tiene un mensaje principal.\n3. Si sobran slides o faltan evidencias.\n4. Si hay lenguaje genérico o poco accionable.\n5. Si las recomendaciones están justificadas.\n6. Si los riesgos están equilibrados.\n7. Qué preguntas difíciles podría hacer el cliente.\n\nDevuelve recomendaciones concretas slide por slide.`,
+    research: `Investiga el estado actual de [tema profesional] para preparar una recomendación de NATEEVO a un cliente del sector [sector]. Mi rol: ${r.title}.\n\nUsa fuentes recientes y fiables. Devuelve:\n1. Resumen ejecutivo.\n2. Hechos confirmados.\n3. Tendencias relevantes.\n4. Riesgos e incertidumbres.\n5. Implicaciones para el cliente.\n6. Oportunidades para NATEEVO.\n7. Recomendaciones accionables.\n8. Fuentes consultadas y nivel de confianza.\n\nDistingue claramente: [HECHO], [TENDENCIA], [HIPOTESIS], [RIESGO], [INCERTIDUMBRE], [RECOMENDACION].\nNo presentes como hecho lo que sea una predicción o interpretación.`,
+    researchQuality: `Revisa las fuentes utilizadas en la investigación. Devuelve una tabla con:\n- fuente\n- tipo de fuente: primaria, informe sectorial, proveedor, medio, blog, otro\n- fecha\n- afirmación que soporta\n- posible sesgo\n- nivel de confianza: alto, medio o bajo\n- si debe usarse en la recomendación final\n\nElimina o degrada cualquier fuente que no sea fiable, reciente o relevante.\nDescarta fuentes anteriores a 18 meses salvo que sean estructurales.`,
+    outlook: `Resume este hilo de correo. Devuelve:\n1. Asunto y participantes.\n2. Contexto en 3 líneas.\n3. Decisiones tomadas con responsable.\n4. Tareas pendientes con responsable y fecha si existen.\n5. Preguntas abiertas.\n6. Borrador de respuesta no enviado, tono ${audi.toLowerCase()}.\n\nReglas:\n- No inventes responsables ni fechas.\n- Marca como [PENDIENTE] cualquier dato no confirmado.\n- No lo redactes como si ya estuviera enviado.`,
+    teams: `Sintetiza esta reunión de Teams. Devuelve:\n1. Resumen ejecutivo en 5 líneas.\n2. Acuerdos formales con responsable.\n3. Tareas pendientes con responsable y fecha si existen.\n4. Decisiones tomadas.\n5. Preguntas abiertas y pendientes.\n6. Riesgos o contradicciones detectados.\n7. Borrador de email de follow-up no enviado.\n\nReglas:\n- Valida quién dijo qué antes de asignar tareas.\n- No inventes compromisos.\n- Si una intervención fue ambigua, márcala como [VERIFICAR].`,
+    cowork: `Voy a trabajar contigo en un flujo de producción ejecutiva para mi rol (${r.title}).\n\nQuiero que:\n1. Mantengas en memoria mi rol, audiencia habitual y casos típicos: ${r.cases.join('; ')}.\n2. Reutilices el contexto entre archivos del proyecto.\n3. Cuando te pida un nuevo entregable, partas siempre del último contexto validado.\n4. Mantengas una biblioteca personal de prompts que vaya creciendo en cada sesión.\n5. Antes de proponer una salida final, me indiques qué información del proyecto estás usando.\n\nReglas:\n- No inventes contexto: si no lo tienes, pídelo.\n- Marca claramente qué viene del proyecto y qué viene del conocimiento general.\n- Cuando un dato necesite verificación, etiquétalo como [VERIFICAR].`
+  };
+}
+
+const ARSENAL = [
+  ['Preparar reunión','word, copilot-chat','Resume contexto, objetivos, riesgos, preguntas críticas y decisión buscada antes de una reunión con cliente. Indica qué información falta y márcala como [PENDIENTE].'],
+  ['Extraer compromisos','teams, outlook','De esta acta o transcripción, extrae acuerdos, responsables, fechas, dependencias y pendientes. No inventes responsables ni fechas.'],
+  ['Reescribir por audiencia','word','Adapta este contenido para dirección, equipo técnico y equipo comercial, manteniendo los hechos. Indica qué cambia de énfasis y qué riesgo nuevo aparece en cada versión.'],
+  ['Resumen ejecutivo','word, copilot-chat','Convierte este material en cinco líneas: problema, evidencia, impacto, recomendación y próximo paso. Si falta evidencia, dilo expresamente.'],
+  ['Tabla de decisiones','word, ppt','Extrae decisiones necesarias, opciones, pros/contras, recomendación y riesgo de no decidir. Devuelve en tabla.'],
+  ['Riesgos de proyecto','word, copilot-chat','Identifica riesgos técnicos, de datos, negocio, cliente, timing y adopción, con mitigaciones. Marca prioridad alta/media/baja y owner sugerido.'],
+  ['Preguntas al cliente','word, researcher','Genera preguntas de discovery ordenadas por negocio, datos, tecnología, procesos y decisión. Indica qué pregunta resuelve qué incertidumbre.'],
+  ['Propuesta preliminar','word','Convierte estas notas en una propuesta preliminar con alcance, valor, fases y dependencias. Marca cifras no respaldadas como [VERIFICAR].'],
+  ['Análisis de funnel','excel, analyst','Analiza conversión por etapa, canal y dispositivo; detecta fricciones y prioriza hipótesis CRO. No confundas correlación con causalidad.'],
+  ['Campañas CRM','excel, analyst','Analiza rendimiento por segmento, canal y objetivo; detecta oportunidades y riesgos de atribución. Distingue conversión asistida de directa.'],
+  ['Auditoría Martech','excel, word','Organiza herramientas, usos, duplicidades, integraciones, riesgos y roadmap recomendado. Marca dependencias críticas.'],
+  ['Mapa de journeys','word, ppt','Propón journeys, triggers, audiencias, datos necesarios, mensajes y KPIs de medición. Indica qué requiere consentimiento.'],
+  ['Red team','word, ppt, copilot-chat','Critica este entregable: fuentes débiles, lenguaje genérico, afirmaciones no respaldadas y riesgos omitidos. Devuelve tabla priorizada.'],
+  ['Notas de ponente','ppt','Genera notas de ponente por slide con mensaje principal, transición y posible pregunta difícil del cliente.'],
+  ['Versión corta','word, ppt','Reduce este entregable a una versión de 1 página sin perder decisión, riesgos ni recomendación.'],
+  ['Versión comercial','word','Reescribe para una oportunidad comercial: valor para cliente, alcance inicial y siguiente paso. Sin jerga consultiva.'],
+  ['Versión técnica','word, copilot-chat','Reescribe para equipo data/tech: dependencias, integraciones, riesgos y datos necesarios.'],
+  ['Checklist privacidad','word, copilot-chat','Revisa si este contenido contiene datos personales, cliente identificable o información sensible. Sugiere cómo anonimizar.'],
+  ['Validar fuentes','researcher','Clasifica fuentes por fiabilidad, fecha, sesgo, afirmación soportada y nivel de confianza. Descarta las no fiables.'],
+  ['Preguntas difíciles','word, ppt','Anticipa objeciones de cliente y prepara respuestas breves, honestas y basadas en evidencia.'],
+  ['Follow-up','outlook, word','Redacta un email de seguimiento con acuerdos, tareas, responsables, pendientes y próximo hito. No lo redactes como ya enviado.'],
+  ['Plan de acción','word, ppt','Convierte recomendaciones en plan 30/60/90 días con responsables, dependencias y entregables.'],
+  ['Estimación de impacto','excel, analyst','Propón cómo medir impacto: KPIs, baseline, periodo y riesgos de interpretación.'],
+  ['Comparar opciones','word, ppt','Compara tres opciones de solución por impacto, esfuerzo, riesgo, coste y dependencia. Tabla.'],
+  ['Post-mortem','word','Analiza qué funcionó, qué falló, qué aprendimos y qué cambiaremos en el siguiente proyecto.']
+];
+
+const CHECKLISTS = {
+  word:[
+    'El memo tiene máximo 2 páginas.',
+    'El resumen ejecutivo cabe en 5 líneas.',
+    'Los hechos están separados de las hipótesis.',
+    'Hay riesgos y dependencias explícitos.',
+    'Se pide una decisión o siguiente paso concreto.',
+    'Las cifras y fechas están verificadas o marcadas como [VERIFICAR].',
+    'El lenguaje está adaptado a la audiencia.'
+  ],
+  excel:[
+    'La tabla original no se ha modificado sin indicarlo.',
+    'Las métricas tienen fórmula y explicación.',
+    'Los outliers están marcados como observaciones, no como certezas.',
+    'Hay visualizaciones sugeridas con mensaje claro.',
+    'Las conclusiones no confunden correlación con causalidad.',
+    'Los datos faltantes están marcados.',
+    'El resumen ejecutivo cabe en 150 palabras.'
+  ],
+  ppt:[
+    'El deck tiene 6-8 diapositivas.',
+    'Cada slide tiene título orientado a conclusión.',
+    'La recomendación de NATEEVO es explícita.',
+    'Hay una slide de decisión solicitada.',
+    'Las cifras están verificadas o marcadas.',
+    'Hay notas de ponente.',
+    'El deck evita jerga genérica y bullets vacíos.'
+  ],
+  researcher:[
+    'Las fuentes están identificadas.',
+    'Se distingue hecho, tendencia e hipótesis.',
+    'Hay nivel de confianza por fuente.',
+    'No se usa una fuente comercial como si fuera neutral.',
+    'Las implicaciones están conectadas con el caso del cliente.',
+    'Las recomendaciones no dependen de una sola fuente.'
+  ],
+  final:[
+    'El objetivo del entregable está claro.',
+    'La audiencia está identificada.',
+    'Las fuentes utilizadas están identificadas.',
+    'Las cifras relevantes están verificadas.',
+    'Las hipótesis están separadas de los hechos.',
+    'No hay datos de otros clientes.',
+    'No se han inventado fechas, costes, responsables ni compromisos.',
+    'La recomendación es accionable.',
+    'Hay una decisión concreta que se pide al cliente.',
+    'Los riesgos están formulados sin ambigüedad.',
+    'El lenguaje es adecuado para la audiencia.',
+    'El deck no es solo bonito: cuenta una historia.',
+    'El follow-up está redactado pero no enviado.'
+  ],
+  prompt:[
+    'He definido rol y contexto.',
+    'He indicado audiencia.',
+    'He explicado el objetivo de negocio.',
+    'He dado materiales o fuentes concretas.',
+    'He pedido formato de salida.',
+    'He incluido restricciones: no inventar, marcar pendientes, separar hechos.',
+    'He pedido revisión crítica o red team.',
+    'He iterado al menos una vez.'
+  ],
+  data:[
+    'Conozco el origen de los datos.',
+    'Las columnas clave están explicadas.',
+    'Hay periodo temporal definido.',
+    'Las métricas calculadas tienen fórmula.',
+    'Los outliers están revisados.',
+    'No se mezcla información de clientes distintos.',
+    'No se interpreta correlación como causalidad.',
+    'Las recomendaciones reconocen incertidumbres.'
+  ]
+};
+function currentRole(){return ROLES[state.roleId]||ROLES.direccion;}
+
+function renderRoles(){
+  const grid=$('roleGrid');grid.innerHTML='';
+  Object.entries(ROLES).forEach(([id,r])=>{
+    const b=document.createElement('button');
+    b.className='card select-card'+(id===state.roleId?' selected':'');
+    b.dataset.role=id;
+    b.innerHTML=`<div class="code">${r.code} · ${r.area}</div><h4>${r.title}</h4><p>${r.cases[0]}. ${r.cases[1]}.</p><div class="badges"><span class="badge cyan">${r.audience.split(',')[0]}</span><span class="badge fact">${r.cases.length} casos</span></div>`;
+    b.addEventListener('click',()=>{state.roleId=id;localStorage.setItem('m365.role',id);applyRole();});
+    grid.appendChild(b);
+  });
+}
+
+function applyRole(){
+  renderRoles();
+  const r=currentRole();
+  $('roleConfirmText').innerHTML=`Has seleccionado <strong>${r.title}</strong> (${r.area}). Los prompts, datasets, preguntas al cliente y ejemplos de salida del laboratorio se han adaptado a este perfil. Audiencia por defecto: ${r.audience}.`;
+  // Inyectar nombre del rol en los labs
+  ['labWordRole','labExcelRole','labPptRole','labResearcherRole'].forEach(id=>{const el=$(id);if(el)el.textContent=r.title;});
+  // Materiales de entrada
+  $('labWordInputs').innerHTML=r.inputs.map(x=>`<li>${x}</li>`).join('');
+  // Ejemplo esperado
+  $('labWordExpectedTitle').textContent=`Salida esperada para ${r.title}`;
+  $('labWordExpected').textContent=r.expected;
+  // Datasets excel
+  $('labExcelDatasets').innerHTML=r.datasets.map(x=>`<li>${x}</li>`).join('');
+  // Preguntas excel
+  $('labExcelQuestions').innerHTML=r.questions.map(x=>`<li>${x}</li>`).join('');
+  // Researcher casos
+  $('labResearcherCases').innerHTML=r.researchTopics.map(([k,v])=>`<tr><td><strong>${k}</strong></td><td>${v}</td></tr>`).join('');
+  // Prompts
+  const p=buildPrompts(r);
+  $('pWordOrder').textContent=p.wordOrder;
+  $('pWordMemo').textContent=p.wordMemo;
+  $('pWordAudience').textContent=p.wordAudience;
+  $('pWordRedTeam').textContent=p.wordRedTeam;
+  $('pExcelRead').textContent=p.excelRead;
+  $('pExcelAnalysis').textContent=p.excelAnalysis;
+  $('pExcelMetrics').textContent=p.excelMetrics;
+  $('pExcelValidate').textContent=p.excelValidate;
+  $('pPptDeck').textContent=p.pptDeck;
+  $('pPptDecision').textContent=p.pptDecision;
+  $('pPptNotes').textContent=p.pptNotes;
+  $('pPptCritique').textContent=p.pptCritique;
+  $('pResearch').textContent=p.research;
+  $('pResearchQuality').textContent=p.researchQuality;
+  $('pOutlook').textContent=p.outlook;
+  $('pTeams').textContent=p.teams;
+  $('pCowork').textContent=p.cowork;
+  // Builder defaults from role
+  if(!state.builder.objective){
+    $('bObjective').value=`Convertir los materiales (${r.inputs.slice(0,3).join(', ')}) en el siguiente paquete: ${r.outputForBuilder}`;
+  }
+  updateBuilderPreview();
+  renderKitTree();
+}
+
+function renderDiagnostico(){
+  const checks=document.querySelectorAll('#diagChecks input');
+  const tags=Array.from(checks).filter(c=>c.checked).map(c=>c.dataset.tag);
+  const map={
+    word:{name:'Word Copilot',hint:'Para redactar el memo o documento ejecutivo.',cls:'word'},
+    excel:{name:'Excel Copilot',hint:'Para fórmulas, gráficos y lectura simple de la tabla activa.',cls:'excel'},
+    analyst:{name:'Analyst (agente)',hint:'Para exploración analítica multifuente y validación de métricas.',cls:'analyst'},
+    ppt:{name:'PowerPoint Copilot',hint:'Para construir el deck final dentro del estilo corporativo.',cls:'ppt'},
+    researcher:{name:'Researcher (agente)',hint:'Para investigación con fuentes externas y nivel de confianza.',cls:'researcher'},
+    outlook:{name:'Outlook Copilot',hint:'Para resumir hilos y generar follow-up no enviado.',cls:'outlook'},
+    teams:{name:'Teams Copilot',hint:'Para sintetizar reuniones con acuerdos y tareas.',cls:'teams'},
+    cowork:{name:'Cowork',hint:'Para organizar archivos y reutilizar contexto entre sesiones.',cls:'copilot'}
+  };
+  const out=$('diagTools');
+  out.innerHTML=tags.length?tags.map(t=>{
+    const m=map[t];
+    return `<div class="tool-card ${m.cls}"><div class="tool-name">${m.name}</div><div class="small">${m.hint}</div></div>`;
+  }).join(''):'<div class="small">Selecciona al menos una opción.</div>';
+  const order=[];
+  if(tags.includes('cowork'))order.push('Organiza primero con Cowork.');
+  if(tags.includes('teams')||tags.includes('outlook'))order.push('Resume reuniones e hilos antes de redactar.');
+  if(tags.includes('word'))order.push('Genera el memo con Word Copilot.');
+  if(tags.includes('excel')||tags.includes('analyst'))order.push('Analiza el dataset con Excel Copilot o Analyst.');
+  if(tags.includes('researcher'))order.push('Investiga contexto externo con Researcher.');
+  if(tags.includes('ppt'))order.push('Construye el deck final con PowerPoint Copilot al final.');
+  $('diagSummary').textContent=tags.length?`Combinación recomendada: ${tags.length} herramienta(s)`:'Selecciona qué aplica a tu caso.';
+  $('diagRecommendation').textContent=order.length?'Orden sugerido: '+order.join(' → ')+' Valida cada salida antes de pasar a la siguiente.':'Marca las casillas para obtener una recomendación de orden y herramientas.';
+}
+
+function renderCheckList(rootId,key,items){
+  const root=$(rootId);root.innerHTML='';
+  items.forEach((txt,i)=>{
+    const id=`${key}-${i}`;
+    const checked=state.checks[id]?'checked':'';
+    const label=document.createElement('label');
+    label.className='check';
+    label.innerHTML=`<input type="checkbox" data-key="${id}" ${checked}><span>${txt}</span>`;
+    label.querySelector('input').addEventListener('change',e=>{
+      state.checks[id]=e.target.checked;
+      localStorage.setItem('m365.checks',JSON.stringify(state.checks));
+      updateFinalProgress();
+    });
+    root.appendChild(label);
+  });
+}
+
+function updateFinalProgress(){
+  const all=[...CHECKLISTS.word,...CHECKLISTS.excel,...CHECKLISTS.ppt,...CHECKLISTS.researcher,...CHECKLISTS.final,...CHECKLISTS.prompt,...CHECKLISTS.data];
+  const keys=['word','excel','ppt','researcher','final','prompt','data'];
+  let total=0,done=0;
+  keys.forEach(k=>{CHECKLISTS[k].forEach((_,i)=>{total++;if(state.checks[`${k}-${i}`])done++;});});
+  const pct=Math.round(done/total*100);
+  $('finalProgress').style.width=pct+'%';
+  $('finalProgressLabel').textContent=`Progreso global: ${pct}% · ${done}/${total} controles`;
+  $('finalProgressRec').textContent=pct<30?'Aún en producción: completa los laboratorios.':pct<70?'Avanzando. Revisa los controles del entregable final antes de compartir.':pct<100?'Casi listo. Repasa los controles pendientes antes de enviar.':'Todos los controles marcados. Recuerda que el último filtro es tu criterio profesional.';
+}
+
+function renderArsenal(){
+  const filters=['todos','word','excel','analyst','ppt','researcher','outlook','teams','copilot-chat'];
+  const fb=$('arsenalFilters');
+  if(!fb.dataset.ready){
+    fb.innerHTML=filters.map((f,i)=>`<button class="chip ${i===0?'active':''}" data-filter="${f}">${f}</button>`).join('');
+    fb.dataset.filter='todos';
+    fb.dataset.ready='1';
+    fb.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+      fb.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      ch.classList.add('active');
+      fb.dataset.filter=ch.dataset.filter;
+      renderArsenal();
+    }));
+    $('arsenalSearch').addEventListener('input',renderArsenal);
+  }
+  const filter=fb.dataset.filter||'todos';
+  const q=($('arsenalSearch').value||'').toLowerCase();
+  const grid=$('arsenalGrid');grid.innerHTML='';
+  ARSENAL.filter(a=>{
+    const txt=a.join(' ').toLowerCase();
+    return (filter==='todos'||a[1].includes(filter)) && (!q||txt.includes(q));
+  }).forEach((a,idx)=>{
+    const tools=a[1].split(',').map(t=>t.trim());
+    const div=document.createElement('div');
+    div.className='card';
+    const tid=`arsenalPrompt-${idx}`;
+    div.innerHTML=`<h4>${a[0]}</h4><div class="badges" style="margin-bottom:10px">${tools.map(t=>`<span class="badge cyan">${t}</span>`).join('')}</div><p style="margin-bottom:10px">${a[2]}</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn compact" data-prompt-id="${tid}">Copiar</button></div><pre id="${tid}" style="display:none">${a[2]}</pre>`;
+    div.querySelector('button').addEventListener('click',e=>{
+      navigator.clipboard.writeText(a[2]).then(()=>{
+        e.target.textContent='Copiado';e.target.classList.add('copied');
+        setTimeout(()=>{e.target.textContent='Copiar';e.target.classList.remove('copied');},1200);
+      });
+    });
+    grid.appendChild(div);
+  });
+}
+
+function readBuilder(){
+  return {
+    client:$('bClient').value.trim(),
+    project:$('bProject').value,
+    audience:$('bAudience').value,
+    objective:$('bObjective').value.trim(),
+    materials:splitLines($('bMaterials').value),
+    decision:$('bDecision').value.trim(),
+    sensitive:$('bSensitive').value.trim(),
+    tools:$('bTools').value.trim(),
+    version:$('bVersion').value.trim()
+  };
+}
+
+function saveBuilder(){
+  state.builder=readBuilder();
+  localStorage.setItem('m365.builder',JSON.stringify(state.builder));
+}
+
+function masterPrompt(){
+  const d=readBuilder();const r=currentRole();
+  return `Actúa como ${r.rolePromptHint}.\nQuiero transformar información dispersa en un paquete ejecutivo para ${(d.audience||r.audience).toLowerCase()}.\n\nContexto:\n- Cliente o sector: ${d.client||'[PENDIENTE]'}\n- Tipo de proyecto: ${d.project}\n- Audiencia principal: ${d.audience||r.audience}\n- Objetivo del entregable: ${d.objective||'[PENDIENTE]'}\n- Materiales disponibles:\n${bullet(d.materials.length?d.materials:['[PENDIENTE: añadir materiales]'])}\n- Decisión que queremos impulsar: ${d.decision||'[PENDIENTE]'}\n- Datos sensibles a excluir o anonimizar: ${d.sensitive||'[PENDIENTE: revisar antes de pegar materiales]'}\n- Herramientas previstas: ${d.tools||'Word Copilot, Analyst, PowerPoint Copilot, Researcher'}\n\nTarea:\nCrea un paquete ejecutivo compuesto por:\n1. Resumen ejecutivo en 5 líneas.\n2. Memo de 1-2 páginas.\n3. Hallazgos clave.\n4. Riesgos y dependencias.\n5. Preguntas críticas para el cliente.\n6. Recomendaciones priorizadas por impacto, esfuerzo y riesgo.\n7. Estructura de presentación de 6-8 diapositivas con notas de ponente.\n8. Borrador de email de seguimiento posterior, no enviado.\n9. Checklist de validación final.\n\nReglas:\n- Distingue [HECHO], [HIPOTESIS], [RECOMENDACION], [PENDIENTE], [NO LOCALIZADO] y [VERIFICAR].\n- No inventes cifras, fechas, responsables, costes ni compromisos.\n- Señala contradicciones entre fuentes.\n- Identifica datos sensibles o información que no debería compartirse.\n- Adapta el lenguaje a la audiencia indicada.\n- Termina indicando qué debe revisar una persona antes de enviar.\n\nFormato de salida final esperado:\n${r.outputForBuilder}`;
+}
+
+function masterSpec(){
+  const d=readBuilder();const r=currentRole();
+  return `# Paquete ejecutivo · ${d.client||'[Cliente]'} · ${d.project}\n\nVersión: ${d.version||'v0.1'}\nRol que ejecuta: ${r.title}\nAudiencia: ${d.audience||r.audience}\n\n## 1. Objetivo\n${d.objective||'[PENDIENTE]'}\n\n## 2. Decisión que se busca\n${d.decision||'[PENDIENTE]'}\n\n## 3. Materiales disponibles\n${bullet(d.materials.length?d.materials:['[PENDIENTE]'])}\n\n## 4. Herramientas previstas\n${d.tools||'Word Copilot, Analyst, PowerPoint Copilot, Researcher'}\n\n## 5. Datos sensibles a excluir o anonimizar\n${d.sensitive||'[PENDIENTE: revisar antes de procesar]'}\n\n## 6. Salida final esperada\n${r.outputForBuilder}\n\n## 7. Flujo de trabajo\n1. Ordenar contexto con Copilot Chat o Word.\n2. Memo ejecutivo con Word Copilot.\n3. Análisis con Excel Copilot o Analyst.\n4. Investigación con Researcher.\n5. Deck con PowerPoint Copilot.\n6. Validación humana con checklists.\n7. Follow-up no enviado en Outlook o Word.\n\n## 8. Etiquetas obligatorias\n[HECHO], [HIPOTESIS], [RECOMENDACION], [PENDIENTE], [NO LOCALIZADO], [VERIFICAR].\n\n## 9. Preguntas críticas tipo para este rol\n${bullet(r.questions)}\n\n## 10. Changelog\n- ${d.version||'v0.1'} · Especificación inicial generada en laboratorio.`;
+}
+
+function masterChecklist(){
+  return CHECKLISTS.final.map(x=>`- [ ] ${x}`).join('\n')+'\n\n## Checklist del prompt\n'+CHECKLISTS.prompt.map(x=>`- [ ] ${x}`).join('\n')+'\n\n## Checklist de datos\n'+CHECKLISTS.data.map(x=>`- [ ] ${x}`).join('\n');
+}
+
+function linter(){
+  const d=readBuilder();const issues=[];
+  const add=(t,m)=>issues.push({type:t,msg:m});
+  if(!d.client)add('warn','Falta cliente o sector. Aunque sea anonimizado, define el contexto.');
+  if(!d.objective||d.objective.length<60)add('bad','El objetivo es vago. Define qué cambia tras el entregable.');
+  if(!d.materials.length)add('bad','Faltan materiales. El paquete no puede construirse sin entradas reales.');
+  if(!d.decision)add('bad','Falta decisión buscada. Sin ella, el deck no tiene cierre.');
+  if(!d.sensitive)add('warn','No has indicado datos sensibles a excluir. Repasa la política antes de pegar materiales.');
+  if(!d.tools)add('warn','No has fijado herramientas previstas. El equipo no sabrá dónde se ejecuta cada paso.');
+  const all=Object.values(d).flat().join(' ').toLowerCase();
+  ['transformar','revolucionar','optimizar al máximo','de calidad','profesional','eficiente','sin problemas'].forEach(v=>{
+    if(all.includes(v))add('warn',`Frase vaga detectada: "${v}". Sustitúyela por criterio operativo.`);
+  });
+  if(issues.length===0)add('ok','El paquete tiene los mínimos definidos. Aún así, revisa cifras, fuentes y datos sensibles antes de compartir.');
+  return issues;
+}
+
+function updateBuilderPreview(){
+  saveBuilder();
+  const target=state.preview;
+  let text=target==='spec'?masterSpec():target==='checklist'?masterChecklist():masterPrompt();
+  $('builderPreview').textContent=text;
+  $('previewTitle').textContent=target==='spec'?'Especificación':target==='checklist'?'Checklist validación':'Prompt maestro';
+  const list=$('linterList');list.innerHTML='';
+  linter().forEach(i=>{
+    const div=document.createElement('div');
+    div.className='lint '+(i.type==='bad'?'bad':i.type==='ok'?'ok':'');
+    div.innerHTML=`<span class="s">${i.type==='bad'?'!':i.type==='ok'?'✓':'?'}</span><span>${i.msg}</span>`;
+    list.appendChild(div);
+  });
+  renderKitTree();
+}
+
+function loadBuilderFromState(){
+  const s=state.builder||{};
+  if(s.client!==undefined)$('bClient').value=s.client;
+  if(s.project)$('bProject').value=s.project;
+  if(s.audience)$('bAudience').value=s.audience;
+  if(s.objective!==undefined)$('bObjective').value=s.objective;
+  if(s.materials)$('bMaterials').value=Array.isArray(s.materials)?s.materials.join('\n'):s.materials;
+  if(s.decision!==undefined)$('bDecision').value=s.decision;
+  if(s.sensitive!==undefined)$('bSensitive').value=s.sensitive;
+  if(s.tools!==undefined)$('bTools').value=s.tools;
+  if(s.version)$('bVersion').value=s.version;
+}
+
+function renderHabits(){
+  const root=$('habitsList');root.innerHTML='';
+  if(!state.habits.length){state.habits=Array.from({length:3},()=>({habit:'',when:'',risk:''}));}
+  state.habits.forEach((h,idx)=>{
+    const row=document.createElement('div');
+    row.className='grid';
+    row.style.cssText='grid-template-columns:1fr 1fr 1fr auto;gap:10px;margin-bottom:10px;align-items:start';
+    row.innerHTML=`
+      <div class="field"><label>Hábito ${idx+1}</label><input type="text" data-i="${idx}" data-k="habit" value="${(h.habit||'').replace(/"/g,'&quot;')}" placeholder="Usar prompt de red team antes de enviar"></div>
+      <div class="field"><label>Cuándo</label><input type="text" data-i="${idx}" data-k="when" value="${(h.when||'').replace(/"/g,'&quot;')}" placeholder="Antes de cualquier deck con cliente"></div>
+      <div class="field"><label>Riesgo a controlar</label><input type="text" data-i="${idx}" data-k="risk" value="${(h.risk||'').replace(/"/g,'&quot;')}" placeholder="Que el deck pase sin crítica interna"></div>
+      <div style="padding-top:24px"><button class="btn compact danger" data-del="${idx}" type="button">Eliminar</button></div>
+    `;
+    root.appendChild(row);
+  });
+  root.querySelectorAll('input').forEach(inp=>inp.addEventListener('input',e=>{
+    const i=+e.target.dataset.i;const k=e.target.dataset.k;
+    state.habits[i][k]=e.target.value;
+    localStorage.setItem('m365.habits',JSON.stringify(state.habits));
+  }));
+  root.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',e=>{
+    const i=+e.target.dataset.del;
+    state.habits.splice(i,1);
+    localStorage.setItem('m365.habits',JSON.stringify(state.habits));
+    renderHabits();
+  }));
+}
+
+function renderKitTree(){
+  const r=currentRole();
+  const slug=toSlug($('bClient').value||r.code);
+  $('kitTree').innerHTML=`<span class="folder">paquete-ejecutivo-${slug}-${r.code.toLowerCase()}/</span>\n├── <span class="file generated">README.md</span>\n├── <span class="file generated">master-prompt.md</span>\n├── <span class="file generated">especificacion.md</span>\n├── <span class="file generated">checklist-validacion.md</span>\n├── <span class="folder">01-prompts/</span>\n│   ├── <span class="file generated">word-ordenar-contexto.md</span>\n│   ├── <span class="file generated">word-memo-ejecutivo.md</span>\n│   ├── <span class="file generated">word-versiones-audiencia.md</span>\n│   ├── <span class="file generated">word-red-team.md</span>\n│   ├── <span class="file generated">excel-lectura-tabla.md</span>\n│   ├── <span class="file generated">excel-analisis-negocio.md</span>\n│   ├── <span class="file generated">excel-metricas-visualizaciones.md</span>\n│   ├── <span class="file generated">excel-validar-formulas.md</span>\n│   ├── <span class="file generated">ppt-deck-ejecutivo.md</span>\n│   ├── <span class="file generated">ppt-slide-decision.md</span>\n│   ├── <span class="file generated">ppt-notas-ponente.md</span>\n│   ├── <span class="file generated">ppt-critica-deck.md</span>\n│   ├── <span class="file generated">researcher-investigacion.md</span>\n│   ├── <span class="file generated">researcher-calidad-fuentes.md</span>\n│   ├── <span class="file generated">outlook-resumir-hilo.md</span>\n│   ├── <span class="file generated">teams-sintesis-reunion.md</span>\n│   └── <span class="file generated">cowork-flujo-persistente.md</span>\n├── <span class="folder">02-checklists/</span>\n│   ├── <span class="file generated">checklist-word.md</span>\n│   ├── <span class="file generated">checklist-excel-analyst.md</span>\n│   ├── <span class="file generated">checklist-powerpoint.md</span>\n│   ├── <span class="file generated">checklist-researcher.md</span>\n│   ├── <span class="file generated">checklist-final-entregable.md</span>\n│   ├── <span class="file generated">checklist-calidad-prompt.md</span>\n│   └── <span class="file generated">checklist-datos.md</span>\n├── <span class="folder">03-arsenal/</span>\n│   └── <span class="file generated">arsenal-prompts.md</span>\n└── <span class="folder">04-habitos/</span>\n    └── <span class="file generated">manual-personal.md</span>`;
+}
+
+function fileBundle(){
+  const r=currentRole();const d=readBuilder();const p=buildPrompts(r);
+  const files={};
+  files['README.md']=`# Paquete ejecutivo · ${r.title}\n\nCliente / sector: ${d.client||'[PENDIENTE]'}\nProyecto: ${d.project}\nAudiencia: ${d.audience||r.audience}\nVersión: ${d.version||'v0.1'}\n\n## Cómo usar este pack\n1. Lee master-prompt.md para entender el flujo general.\n2. Usa los prompts de 01-prompts/ en su herramienta correspondiente (Word, Excel, PowerPoint, Researcher).\n3. Marca los controles de 02-checklists/ a medida que avanzas.\n4. Adapta el arsenal de 03-arsenal/ a tus próximos proyectos.\n\n## Regla operativa\nLa IA produce borradores; tú validas. Distingue siempre [HECHO], [HIPOTESIS], [RECOMENDACION], [PENDIENTE], [NO LOCALIZADO] y [VERIFICAR].`;
+  files['master-prompt.md']=`# Prompt maestro\n\n${masterPrompt()}`;
+  files['especificacion.md']=masterSpec();
+  files['checklist-validacion.md']=masterChecklist();
+  files['01-prompts/word-ordenar-contexto.md']=`# Word · Ordenar contexto\n\n${p.wordOrder}`;
+  files['01-prompts/word-memo-ejecutivo.md']=`# Word · Memo ejecutivo\n\n${p.wordMemo}`;
+  files['01-prompts/word-versiones-audiencia.md']=`# Word · Versiones por audiencia\n\n${p.wordAudience}`;
+  files['01-prompts/word-red-team.md']=`# Word · Red team\n\n${p.wordRedTeam}`;
+  files['01-prompts/excel-lectura-tabla.md']=`# Excel · Lectura inicial de la tabla\n\n${p.excelRead}`;
+  files['01-prompts/excel-analisis-negocio.md']=`# Excel · Análisis de negocio\n\n${p.excelAnalysis}`;
+  files['01-prompts/excel-metricas-visualizaciones.md']=`# Excel · Métricas y visualizaciones\n\n${p.excelMetrics}`;
+  files['01-prompts/excel-validar-formulas.md']=`# Excel · Validar fórmulas\n\n${p.excelValidate}`;
+  files['01-prompts/ppt-deck-ejecutivo.md']=`# PowerPoint · Deck ejecutivo\n\n${p.pptDeck}`;
+  files['01-prompts/ppt-slide-decision.md']=`# PowerPoint · Slide de decisión\n\n${p.pptDecision}`;
+  files['01-prompts/ppt-notas-ponente.md']=`# PowerPoint · Notas de ponente\n\n${p.pptNotes}`;
+  files['01-prompts/ppt-critica-deck.md']=`# PowerPoint · Crítica del deck\n\n${p.pptCritique}`;
+  files['01-prompts/researcher-investigacion.md']=`# Researcher · Investigación con fuentes\n\n${p.research}`;
+  files['01-prompts/researcher-calidad-fuentes.md']=`# Researcher · Calidad de fuentes\n\n${p.researchQuality}`;
+  files['01-prompts/outlook-resumir-hilo.md']=`# Outlook · Resumir hilo\n\n${p.outlook}`;
+  files['01-prompts/teams-sintesis-reunion.md']=`# Teams · Síntesis de reunión\n\n${p.teams}`;
+  files['01-prompts/cowork-flujo-persistente.md']=`# Cowork · Flujo persistente\n\n${p.cowork}`;
+  const cls=(k,t)=>`# ${t}\n\n`+CHECKLISTS[k].map(x=>`- [ ] ${x}`).join('\n');
+  files['02-checklists/checklist-word.md']=cls('word','Checklist · Word');
+  files['02-checklists/checklist-excel-analyst.md']=cls('excel','Checklist · Excel + Analyst');
+  files['02-checklists/checklist-powerpoint.md']=cls('ppt','Checklist · PowerPoint');
+  files['02-checklists/checklist-researcher.md']=cls('researcher','Checklist · Researcher');
+  files['02-checklists/checklist-final-entregable.md']=cls('final','Checklist · Entregable final');
+  files['02-checklists/checklist-calidad-prompt.md']=cls('prompt','Checklist · Calidad del prompt');
+  files['02-checklists/checklist-datos.md']=cls('data','Checklist · Datos y privacidad');
+  files['03-arsenal/arsenal-prompts.md']=`# Arsenal de prompts reutilizables\n\nRol activo: ${r.title}\n\n| Uso | Herramientas | Prompt |\n| --- | --- | --- |\n`+ARSENAL.map(a=>`| ${a[0]} | ${a[1]} | ${a[2].replace(/\|/g,'·')} |`).join('\n');
+  const habits=state.habits.filter(h=>h.habit).map((h,i)=>`${i+1}. **${h.habit}** · Cuándo: ${h.when||'[PENDIENTE]'} · Riesgo a controlar: ${h.risk||'[PENDIENTE]'}`).join('\n');
+  files['04-habitos/manual-personal.md']=`# Manual personal de productividad IA\n\nRol: ${r.title}\n\n${habits||'_(sin hábitos definidos todavía)_'}`;
+  return files;
+}
+
+async function downloadPack(){
+  const r=currentRole();const slug=toSlug($('bClient').value||r.code);
+  const files=fileBundle();
+  if(window.JSZip){
+    const zip=new JSZip();
+    Object.entries(files).forEach(([k,v])=>zip.file(k,v));
+    const blob=await zip.generateAsync({type:'blob'});
+    downloadBlob(blob,`paquete-ejecutivo-${slug}-${r.code.toLowerCase()}.zip`);
+  }else{
+    downloadBlob(new Blob([JSON.stringify(files,null,2)],{type:'application/json'}),`paquete-ejecutivo-${slug}-${r.code.toLowerCase()}.json`);
+    alert('JSZip no disponible. Descargando JSON de respaldo.');
+  }
+}
+
+function downloadBlob(blob,filename){
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},250);
+}
+
+function downloadText(text,filename,type='text/markdown'){downloadBlob(new Blob([text],{type}),filename);}
+
+// === Event wiring ===
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy-target]');
+  if(b){
+    const target=$(b.dataset.copyTarget);
+    if(!target)return;
+    const t=target.textContent;
+    navigator.clipboard.writeText(t).then(()=>{
+      const orig=b.textContent;
+      b.classList.add('copied');
+      b.textContent='Copiado';
+      setTimeout(()=>{b.classList.remove('copied');b.textContent=orig||'Copiar';},1200);
+    });
+  }
+});
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  state.preview=t.dataset.preview;
+  updateBuilderPreview();
+}));
+
+['bClient','bProject','bAudience','bObjective','bMaterials','bDecision','bSensitive','bTools','bVersion'].forEach(id=>{
+  $(id).addEventListener('input',updateBuilderPreview);
+  $(id).addEventListener('change',updateBuilderPreview);
+});
+
+document.querySelectorAll('#diagChecks input').forEach(i=>i.addEventListener('change',renderDiagnostico));
+
+$('prefillRole').addEventListener('click',()=>{
+  const r=currentRole();
+  $('bAudience').value=r.audience.includes('Dirección')?'Dirección del cliente':r.audience.includes('comercial')?'Equipo comercial NATEEVO':r.audience.includes('técnico')||r.audience.includes('Data')?'Equipo técnico / Data / CRM':'Comité mixto';
+  $('bObjective').value=`Convertir los materiales (${r.inputs.slice(0,3).join(', ')}) en el siguiente paquete: ${r.outputForBuilder}`;
+  $('bMaterials').value=r.inputs.join('\n');
+  $('bDecision').value=`Decisión a impulsar: revisar y aprobar internamente la recomendación de ${r.title.toLowerCase()} antes de presentarla al cliente.`;
+  $('bTools').value='Word Copilot, Analyst, PowerPoint Copilot, Researcher';
+  updateBuilderPreview();
+});
+
+$('clearBuilder').addEventListener('click',()=>{
+  ['bClient','bObjective','bMaterials','bDecision','bSensitive','bTools'].forEach(id=>$(id).value='');
+  state.builder={};localStorage.removeItem('m365.builder');
+  updateBuilderPreview();
+});
+
+$('downloadSpec').addEventListener('click',()=>downloadText(masterSpec(),`especificacion-${toSlug($('bClient').value||currentRole().code)}.md`));
+$('downloadPack').addEventListener('click',downloadPack);
+$('downloadJson').addEventListener('click',()=>downloadBlob(new Blob([JSON.stringify(fileBundle(),null,2)],{type:'application/json'}),`paquete-${toSlug($('bClient').value||currentRole().code)}.json`));
+$('downloadAllMd').addEventListener('click',()=>{
+  const r=currentRole();const p=buildPrompts(r);
+  const all=`# Prompts personalizados · ${r.title}\n\n## Word\n\n### Ordenar contexto\n\n${p.wordOrder}\n\n### Memo ejecutivo\n\n${p.wordMemo}\n\n### Versiones por audiencia\n\n${p.wordAudience}\n\n### Red team\n\n${p.wordRedTeam}\n\n## Excel + Analyst\n\n### Lectura inicial de la tabla\n\n${p.excelRead}\n\n### Análisis de negocio\n\n${p.excelAnalysis}\n\n### Métricas y visualizaciones\n\n${p.excelMetrics}\n\n### Validar fórmulas\n\n${p.excelValidate}\n\n## PowerPoint\n\n### Deck ejecutivo\n\n${p.pptDeck}\n\n### Slide de decisión\n\n${p.pptDecision}\n\n### Notas de ponente\n\n${p.pptNotes}\n\n### Crítica del deck\n\n${p.pptCritique}\n\n## Researcher\n\n### Investigación con fuentes\n\n${p.research}\n\n### Calidad de fuentes\n\n${p.researchQuality}\n\n## Outlook\n\n${p.outlook}\n\n## Teams\n\n${p.teams}\n\n## Cowork\n\n${p.cowork}`;
+  downloadText(all,`prompts-${currentRole().code.toLowerCase()}.md`);
+});
+
+$('resetChecklists').addEventListener('click',()=>{
+  if(!confirm('Esto reiniciará todos los checklists guardados en este navegador. ¿Continuar?'))return;
+  state.checks={};localStorage.removeItem('m365.checks');
+  initChecklists();
+  updateFinalProgress();
+});
+
+$('addHabit').addEventListener('click',()=>{state.habits.push({habit:'',when:'',risk:''});localStorage.setItem('m365.habits',JSON.stringify(state.habits));renderHabits();});
+
+function initChecklists(){
+  renderCheckList('checkWord','word',CHECKLISTS.word);
+  renderCheckList('checkExcel','excel',CHECKLISTS.excel);
+  renderCheckList('checkPpt','ppt',CHECKLISTS.ppt);
+  renderCheckList('checkResearcher','researcher',CHECKLISTS.researcher);
+  renderCheckList('checkFinal','final',CHECKLISTS.final);
+  renderCheckList('checkPrompt','prompt',CHECKLISTS.prompt);
+  renderCheckList('checkData','data',CHECKLISTS.data);
+}
+
+// === Init ===
+renderRoles();
+applyRole();
+loadBuilderFromState();
+updateBuilderPreview();
+renderDiagnostico();
+initChecklists();
+updateFinalProgress();
+renderArsenal();
+renderHabits();
+</script>
+</body>
+</html>
